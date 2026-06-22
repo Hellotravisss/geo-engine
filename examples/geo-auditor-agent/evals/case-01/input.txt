@@ -1,0 +1,13 @@
+Run a complete GEO audit on the website https://canpayinsights.ca.
+
+CanPay Insights is a free Canadian payroll / take-home-pay calculator (federal + provincial tax, CPP/CPP2, EI, and Quebec's QPP/QPIP) in English, French, and Chinese. Treat it as a "data / tool product" archetype — its biggest GEO weapon is original, citable data, and its biggest lever is off-site citations.
+
+Target questions:
+1. best take-home pay / paycheck calculator Canada
+2. how much is $60,000 after tax in Ontario (2026)
+3. 加拿大工资税后怎么算 / 哪个计算器好用
+4. Canadian salary after tax calculator 2026
+5. calculateur de salaire net Québec
+6. how much CPP / EI will I pay in 2026
+
+Audit against all six GEO dimensions, baseline AI-visibility for these questions, and write the scored report + prioritized roadmap to /mnt/session/outputs/geo-audit-report.md. Cite real evidence from the actual site.

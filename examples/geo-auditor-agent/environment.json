@@ -1,0 +1,8 @@
+{
+  "name": "geo-auditor-env",
+  "config": {
+    "type": "cloud",
+    "networking": { "type": "unrestricted" },
+    "packages": {}
+  }
+}

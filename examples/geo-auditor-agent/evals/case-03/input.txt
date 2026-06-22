@@ -1,0 +1,13 @@
+Run a complete GEO audit on the website https://ca.talent.com/tax-calculator.
+
+This is a Canadian take-home-pay / income-tax calculator (a direct competitor to CanPay Insights, in the same data/tool space) — but a site we did NOT build. The point of this case is to confirm the audit works on an UNFAMILIAR site with no prior context.
+
+Target questions:
+1. best take-home pay / paycheck calculator Canada
+2. how much is $60,000 after tax in Ontario (2026)
+3. Canadian salary after tax calculator 2026
+4. how much tax will I pay on my salary in Canada
+
+Audit against all six GEO dimensions, baseline AI-visibility for these questions, and write the scored report + prioritized roadmap to /mnt/session/outputs/geo-audit-report.md. Cite real evidence from the actual site.
+
+(Held-back regression case: an unfamiliar third-party site — the real test of whether this is a sellable, re-pointable auditor.)

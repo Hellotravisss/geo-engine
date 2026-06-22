@@ -1,0 +1,14 @@
+# Secrets — never commit
+.env
+*.env
+!.env.example
+IDS.env
+
+# Generated at launch (not source)
+examples/geo-auditor-agent/agent.json
+examples/geo-auditor-agent/kickoff.json
+examples/geo-auditor-agent/outputs/
+examples/geo-auditor-agent/outputs-*/
+
+# System
+.DS_Store

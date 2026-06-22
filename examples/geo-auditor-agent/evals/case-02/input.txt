@@ -1,0 +1,14 @@
+Run a complete GEO audit on the website https://traviszhang.com.
+
+Travis Zhang (Qi Zhang) is a Vancouver architectural, interior & hospitality photographer. Treat it as a "service / local business" archetype — the levers are service+location pages, entity consistency (Google Business Profile, sameAs across LinkedIn/IG/X), reviews, and local citations.
+
+Target questions:
+1. best architectural photographer in Vancouver
+2. interior photographer for designers Vancouver
+3. hospitality / hotel photographer British Columbia
+4. 温哥华建筑摄影师推荐
+5. who shoots editorial interiors for Vancouver design studios
+
+Audit against all six GEO dimensions, baseline AI-visibility for these questions, and write the scored report + prioritized roadmap to /mnt/session/outputs/geo-audit-report.md. Cite real evidence from the actual site.
+
+(Held-back regression case: a DIFFERENT archetype from case-01 — confirms the audit generalizes beyond data/tool products.)

@@ -1,0 +1,15 @@
+{
+  "name": "geo-auditor",
+  "model": "claude-opus-4-8",
+  "description": "GEO/AEO auditor: scores any website's Generative-Engine readiness across six dimensions, baselines its AI-visibility for target questions, and writes a prioritized roadmap. Re-pointable at any URL.",
+  "tools": [
+    { "type": "agent_toolset_20260401" }
+  ],
+  "skills": [],
+  "mcp_servers": [],
+  "metadata": {
+    "built_with": "launch-your-agent",
+    "method": "geo-engine skill (~/.claude/skills/geo-engine)",
+    "archetype_note": "v0 target canpayinsights.ca = data/tool archetype"
+  }
+}

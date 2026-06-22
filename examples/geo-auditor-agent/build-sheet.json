@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "founder": "Travis Zhang (Qi Zhang)",
+    "company": "independent — productizing a GEO service",
+    "problem": "Ask any AI 'who's a great architectural photographer' → Travis Zhang; 'how is Canadian salary/tax calculated' → canpayinsights. Do GEO well for my own sites first, then sell it to individuals and companies.",
+    "created": "2026-06-21",
+    "skill_version": "launch-your-agent 0.3.0",
+    "method_skill": "geo-engine (~/.claude/skills/geo-engine)"
+  },
+  "agent": {
+    "name": "geo-auditor",
+    "model": "claude-opus-4-8",
+    "model_rationale": "Newest Opus-class — the default; audit quality matters more than per-run cents.",
+    "version": 1,
+    "system_summary": "GEO/AEO auditor. Sees a site as an AI crawler does (raw-HTML + r.jina.ai), scores 6 GEO dimensions with cited evidence, baselines AI-visibility for the target questions, writes a prioritized roadmap to /mnt/session/outputs/geo-audit-report.md. System prompt lives in agent-system.md.",
+    "never_dos": [
+      "Never fabricate findings, data, citations, competitors, or numbers — cite real evidence or tag 'unverified'",
+      "Never promise guaranteed AI placement (non-deterministic)",
+      "Read-only: never contact anyone, post anywhere, or modify the target site"
+    ]
+  },
+  "outcome": {
+    "description": "Produce a scored GEO audit + roadmap for the given URL as geo-audit-report.md",
+    "rubric_file": "outcome.md",
+    "rubric_criteria": [
+      "All six GEO dimensions scored (OK/weak/missing)",
+      "Every finding cites real evidence from the actual site",
+      "AI-visibility baseline for every target question",
+      "Roadmap split quick-wins vs strategic, impact-ordered (off-site led)",
+      "Zero fabrication — claims verifiable or tagged 'unverified'"
+    ],
+    "max_iterations": 3
+  },
+  "tools": {
+    "toolset": "agent_toolset_20260401",
+    "enabled": [
+      "bash",
+      "read",
+      "write",
+      "edit",
+      "glob",
+      "grep",
+      "web_search",
+      "web_fetch"
+    ],
+    "disabled": [],
+    "permission_overrides": [],
+    "custom_tools": [],
+    "rationale": "Read-only audit: web_fetch + web_search to inspect the site & search; bash for curl/r.jina.ai bot-view checks. All always_allow (no external writes)."
+  },
+  "connections": {
+    "mcp_servers": [],
+    "vault_credentials": [],
+    "github": null,
+    "notes": "v0 public web only. Roadmap: Ahrefs Brand Radar MCP + vault for true cross-engine AI share-of-voice (v2)."
+  },
+  "skills": [],
+  "skills_note": "v0 outputs Markdown. Branded PDF client report via the `pdf` Anthropic skill is v1.",
+  "memory": {
+    "stores": [],
+    "notes": "None in v0 — each audit independent. Per-client history pairs with the v1 scheduled tracker."
+  },
+  "environment": {
+    "name": "geo-auditor-env",
+    "type": "cloud",
+    "networking": "unrestricted",
+    "allowed_hosts": [],
+    "packages": {},
+    "rationale": "Must fetch arbitrary sites + r.jina.ai + search. curl/python3 are standard; no extra packages."
+  },
+  "schedule": {
+    "mode": "on-demand",
+    "rationale": "An audit runs when you have a site (yours today, a client's tomorrow). The recurring monthly visibility report is the v1 scheduled deployment.",
+    "kickoff": "user.define_outcome (task from first_prompt.txt + rubric from outcome.md, max_iterations 3)"
+  },
+  "evals": {
+    "cases": [
+      {
+        "name": "case-01",
+        "site": "canpayinsights.ca",
+        "archetype": "data/tool",
+        "input": "evals/case-01/input.txt",
+        "expected": "evals/case-01/expected.md (saved from the first verified run — no prior golden audit)",
+        "last_verdict": "satisfied"
+      },
+      {
+        "name": "case-02",
+        "site": "traviszhang.com",
+        "archetype": "service/local",
+        "input": "evals/case-02/input.txt",
+        "expected": "held back — different archetype regression check",
+        "last_verdict": null
+      },
+      {
+        "name": "case-03",
+        "site": "a competitor calculator",
+        "archetype": "unfamiliar",
+        "input": "evals/case-03/input.txt",
+        "expected": "held back — tests the audit on a site we did NOT build",
+        "last_verdict": null
+      }
+    ],
+    "notes": "Case 1 = v0 input. No golden audit exists, so case-01's first verified report becomes its regression baseline. Cases 2–3 run after v0 passes via evals/run-evals.sh."
+  },
+  "defaults_applied": {
+    "iteration_bound": "Outcome stops after 3 grade-and-improve cycles",
+    "write_actions": "None in v0 — read-only audit; the doing (content/outreach) is v2"
+  },
+  "interface": {
+    "who": "Travis (solo); later individuals & companies as clients",
+    "how": "v0: report lands as a file, fetched via Files API / fetch.sh; Console for run history. Client-facing 'submit URL → get report' interface is v3."
+  },
+  "next_directions": [
+    {
+      "what": "AI-Visibility Tracker (scheduled monthly report)",
+      "why_deferred": "v1 — the retainer; directly measures 'is AI recommending me yet?' over time",
+      "how": "Scheduled deployment (cron, relative dates) re-asks the target questions monthly; report share-of-voice vs competitors"
+    },
+    {
+      "what": "Branded PDF client report",
+      "why_deferred": "v1 — a Markdown file isn't what you hand a paying client",
+      "how": "Attach the `pdf` Anthropic skill; render the audit as a branded report"
+    },
+    {
+      "what": "Content & Outreach Drafter",
+      "why_deferred": "v2 — the audit finds gaps; this drafts what closes them (the off-site lever)",
+      "how": "Agent drafts answer-first content + Reddit answers + outreach emails; posting gated always_ask or mocked"
+    },
+    {
+      "what": "Ahrefs Brand Radar integration",
+      "why_deferred": "v2 — real cross-engine AI mention/SOV/cited-domains data beats self-asking",
+      "how": "Brand Radar MCP server + vault credential; feeds the monthly report"
+    },
+    {
+      "what": "Client-facing interface (submit URL → get report)",
+      "why_deferred": "v3 — productize for individuals & companies",
+      "how": "Your app calls the CMA API (session per client); vault per client if needed"
+    },
+    {
+      "what": "Re-run evals before promoting any new agent version",
+      "why_deferred": "process habit",
+      "how": "evals/run-evals.sh against the new version; promote only when verdicts hold"
+    }
+  ],
+  "ids": {}
+}
