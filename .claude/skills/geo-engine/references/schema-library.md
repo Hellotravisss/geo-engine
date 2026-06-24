@@ -1,4 +1,4 @@
-# Schema library — copy-paste JSON-LD
+# Phase 2 — Schema library: copy-paste JSON-LD
 
 Machine-readable facts about the entity. **Only mark up what's visibly true on the page.** Google demotes fake/markup-only data, and false markup poisons the trust the whole strategy depends on. Replace `EXAMPLE.com`, names, handles. Use stable `@id` URLs so nodes reference each other (`worksFor`, `provider`, `founder`, `about`). Validate every page at **validator.schema.org** and **search.google.com/test/rich-results**.
 
@@ -175,6 +175,7 @@ Swap the inner item `@type` to what you actually list (`Product`, `Organization`
 
 ## Common pitfalls
 - Values must match visible text. No invented reviews/ratings/services/prices.
+- **After any data/content change, re-check the schema VALUES still match the page** — it's not enough that the JSON-LD parses; stale schema numbers that contradict the visible page are a trust killer (a common bug after a content update).
 - `@id` must be stable and reused so nodes link (don't mint a new `#person` per page).
 - `sameAs` URLs must resolve. A dead/incorrect profile URL is worse than none.
 - Re-validate after edits; one malformed block can void the page's structured data.

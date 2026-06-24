@@ -1,5 +1,7 @@
 # Phases 0 & 4 — Measurement & reporting
 
+> **Signpost:** in **Phase 0** read **§1** (build the prompt-test set). In **Phase 4** use **§2–4 + the report template**.
+
 The measurement layer is what makes GEO a *service* instead of a favor: it sets the baseline that proves your value, and the monthly report **is** the retainer deliverable and the case-study fuel for selling the next client. Stand it up in Phase 0; run it on a fixed cadence in Phase 4.
 
 The honest framing for the client: AI answers are **non-deterministic and personalized** — the same prompt gives different answers across users and days. So we measure a **rate over a fixed prompt set across runs**, and track the **trend**, never a single lucky (or unlucky) snapshot.
@@ -42,7 +44,9 @@ Derive the headline KPIs by **averaging**: mention rate / link rate = mean of pe
 
 > **Read the trend, not the wobble.** With ~20 prompts a month-over-month swing under ~±5–10 points is mostly sampling noise — only a **sustained 3+ month move** is signal. Tell the client this up front so a noisy month doesn't spook anyone.
 
-## 3. The instrumented method (Ahrefs Brand Radar — the enterprise backbone)
+## 3. Optional instrumentation — Ahrefs Brand Radar (or similar; only if the client already pays for it)
+
+> **A paid add-on, not the default.** Most SMB/solo clients (the case-study tier) won't have it — the manual method in §2 is the floor and works for everyone. Comparable paid tools to name if asked: **Profound, Peec AI, Otterly.AI, Semrush AI**. If one is connected it makes SOV + cited-domains robust instead of hand-collected; if not, derive SOV manually per §2.
 
 If the user has **Ahrefs Brand Radar** (or a comparable AI-visibility platform) connected, use it to make the report robust and scalable instead of hand-collected. Discover the tools at runtime — don't hardcode server names:
 

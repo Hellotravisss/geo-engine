@@ -56,6 +56,7 @@ Score each dimension **✅ OK / ⚠️ weak / ❌ missing**, grouped by the leve
 5. Are there original-data assets others *would want* to cite?
 
 ### B. Original data & content quality 🔑
+- ⚠️ **Data-correctness check (high-severity for data/tool brands):** are the brand's OWN published facts / figures / calculator outputs **correct and internally consistent** — no stale constants, no cross-page contradictions? AI amplifies a wrong number. *(CanPay shipped a stale, self-contradicting tax constant — exactly this failure.)*
 6. Is there content with **specific, original numbers/stats/sources** (not generic guides)?
 7. Or is the site padded with thin, AI-spun "X guide" filler? (a liability — note for pruning)
 8. First-hand expertise / real examples / E-E-A-T present?

@@ -1,7 +1,7 @@
 ---
 name: geo-engine
 description: Professional Generative Engine Optimization (GEO / AEO) operator — get a brand cited, mentioned, and recommended by AI answer engines (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude, Copilot). Runs a full engagement: scope & baseline → scored audit → on-site implementation (AI-crawler access, llms.txt, structured data, answer-first content) → off-site citation building (Reddit, original-data outreach, HARO/Featured/Qwoted, Wikidata, listicles) → measurement & monthly AI-visibility reporting, with client-ready deliverables. Use this skill whenever the user mentions GEO, AEO, "AI SEO", LLM SEO, getting cited / mentioned / recommended by AI, wanting to "rank in" / "show up in" / "get found by" / "appear in" ChatGPT, Perplexity, Gemini or other AI assistants, AI search visibility, AI Overviews, share of voice in AI answers, llms.txt, brand visibility in ChatGPT / Perplexity / Gemini, or wants to audit or improve how a website or brand shows up in AI-generated answers — even if they don't say "GEO" explicitly. Also use when building a sellable GEO audit or retainer service for clients.
-version: 1.2.0
+version: 1.3.0
 ---
 
 <!-- geo-engine — Generative Engine Optimization operator. Built from real engagements. -->
@@ -91,7 +91,7 @@ The archetype sets the priority order. Confirm it in Phase 0, then read the matc
 
 Read the file for the phase you're in — don't load everything at once.
 
-- `references/archetypes.md` — map a brand to its playbook; the two proven case studies (data/tool + service/local) as proof points and worked examples.
+- `references/archetypes.md` — map a brand to its playbook; two worked case studies that prove the *method* (off-site/original-data via CanPay; on-site/entity via traviszhang), not archetype breadth — the other types are still unvalidated.
 - `references/audit-rubric.md` — the scored audit + client audit-report template (Phase 1).
 - `references/onsite-sop.md` — robots.txt, llms.txt, answer-first content, content pruning, internal linking, freshness, with templates (Phase 2).
 - `references/schema-library.md` — copy-paste JSON-LD for every archetype (Phase 2).

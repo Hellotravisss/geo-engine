@@ -1,4 +1,4 @@
-# Archetypes — map a brand to its GEO playbook
+# Phase 0 — Archetypes: map a brand to its GEO playbook
 
 The archetype set in Phase 0 decides the **priority order** of everything else. Confirm it explicitly with the user, then weight the engagement toward that archetype's top levers. Most brands map cleanly to one; some blend two (e.g. a SaaS with a free data tool — run both).
 

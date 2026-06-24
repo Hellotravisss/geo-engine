@@ -126,7 +126,8 @@ Link only real, live pages. Update llms.txt whenever you add pages.
   ```
 - **Headings** read like the questions people ask AI ("How an interior shoot works", "What's included", "How much does X cost?"). Keyword in intro + ≥2 H2s, never stuffed.
 - **Image alt text** describes the real subject + context, not "image 01".
-- **Canonical & host** — pick ONE host (apex *or* www). Set `<link rel="canonical">`, `og:url`, sitemap, and internal links to it. Mismatched www/apex splits the entity.
+- **Canonical & host** — collapse every duplicate that splits the entity: force **ONE host** (apex *or* www), **ONE scheme** (https), and **ONE trailing-slash** convention; all other variants `301`/`308` to the canonical. Set `<link rel="canonical">`, `og:url`, sitemap, and internal links to it. Verify: `for u in http://EXAMPLE.com https://www.EXAMPLE.com https://EXAMPLE.com/page; do curl -sI "$u" | grep -iE "^HTTP|^location"; done` — each non-canonical variant should redirect, not return 200.
+- **Multi-locale (only if genuinely multilingual)** — one URL per locale; reciprocal `hreflang` between them **including `x-default`**; a **self-referential canonical per locale** (never canonicalize `/fr` → `/en`); translate the facts, don't contradict them across locales.
 
 ## 5. The two silent killers (check on every site)
 
