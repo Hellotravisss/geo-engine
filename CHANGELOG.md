@@ -2,6 +2,9 @@
 
 All notable changes to **geo-engine**. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.1] — 2026-06-23
+Tier-3 polish: GEO acronym disambiguated in the trigger description (fewer geography false-positives) + colloquial trigger verbs; `sr-only` hidden-H1 cloaking guardrail; honesty hedges (retrieval path dominant in 2026; structured data is "mostly hygiene", limited direct citation evidence).
+
 ## [1.3.0] — 2026-06-23
 Second wave of self-review (Tier-2) fixes + changelog.
 ### Added

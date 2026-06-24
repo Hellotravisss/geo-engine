@@ -117,7 +117,7 @@ Link only real, live pages. Update llms.txt whenever you add pages.
 
 - **`<title>`** — `Primary Keyword + Place | Brand`, <~60 chars, unique per page.
 - **Meta description** — ~150–160 chars, keyword + place + who it's for. AI may quote it.
-- **Exactly one H1** carrying the core keyword. If the visible hero is a poetic line you don't want to change, keep the design with a visually-hidden real H1:
+- **Exactly one H1** carrying the core keyword. If the visible hero is a poetic line you don't want to change, keep the design with a visually-hidden real H1 — **but it must restate genuine visible content, never inject keywords that appear nowhere else on the page (that's cloaking, and it gets penalized):**
   ```html
   <h1 class="sr-only">Vancouver Architectural & Interior Photographer — Brand</h1>
   ```
