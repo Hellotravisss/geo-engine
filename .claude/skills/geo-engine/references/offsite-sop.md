@@ -1,6 +1,6 @@
 # Phase 3 — Off-site citation building (the real lever)
 
-This is where ~80% of the GEO result is won, and where most competitors won't do the work — your edge. The mechanism: AI recommends entities that appear, with consistent framing, across **many trusted third-party places**. That feeds both the retrieval path (the engine searches and finds you cited) and the memory path (repeated mentions enter training data). It's the same underlying logic as backlinks — earned, not bought.
+This is the **dominant lever** — where the result is mostly won, and where most competitors won't do the work — your edge *(it moves AI recommendations far more than any on-site tweak; treat that as a directional rule of thumb, not a measured split — don't quote a number to clients)*. The mechanism: AI recommends entities that appear, with consistent framing, across **many trusted third-party places**. That feeds both the retrieval path (the engine searches and finds you cited) and the memory path (repeated mentions enter training data). It's the same underlying logic as backlinks — earned, not bought.
 
 This is a **sustained program, not a one-off** — frame it to the client as the retainer. Run three fronts in parallel, ranked by ROI.
 
@@ -85,6 +85,8 @@ Ask relevant sites to add the brand to an existing "tools/resources" list — **
 - **Quality directories & profiles** relevant to the niche (G2/Capterra for SaaS, Product Hunt for tools, industry associations for services) — selective, real ones only.
 - **Google Business Profile** (local/service brands) — claim it; set category, service area, website, photos, services. Major for "[service] in [city]" and Maps. Seed early, genuine reviews. Keep NAP (name/address/phone) identical to the site and every directory.
 - **Partner/client credit links** — designers, vendors, and clients you work with linking back to the same entity + URL.
+- **Get listed where the engines already look.** Pull the *cited-domains* for your target prompts (the baseline / `measurement.md` shows which sites AI actually cites in your niche) — those listicles, directories and aggregators **are** the retrieval set. Claim / submit / correct your entry on each, keeping NAP + the entity sentence identical to your site so they reinforce (not split) the entity.
+- **If the brand *itself* is a directory/aggregator** (see `archetypes.md`): the play inverts — you want to *be* the cited list. Get the directory into "best [category] directories" roundups, earn press for the breadth/freshness of your coverage, and offer your aggregated data (where you have the rights) as a citable resource.
 
 ---
 

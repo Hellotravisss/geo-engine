@@ -39,7 +39,9 @@ User-agent: Perplexity-User
 Allow: /
 User-agent: ClaudeBot
 Allow: /
-User-agent: Claude-SearchBot
+User-agent: Claude-SearchBot   # Claude web search — drives Claude citations
+Allow: /
+User-agent: Claude-User        # Claude browsing on a user's behalf
 Allow: /
 User-agent: Google-Extended    # Gemini/Vertex training opt-in (does NOT affect Search/AI Overviews)
 Allow: /
@@ -48,12 +50,23 @@ Allow: /
 User-agent: Applebot-Extended  # Apple Intelligence
 Allow: /
 User-agent: CCBot              # Common Crawl — feeds many models' training data
+Allow: /
 
 Sitemap: https://EXAMPLE.com/sitemap.xml
 ```
 
+> This is the **canonical, complete bot list** for the whole skill — other files point here rather than re-listing (lists churn; keep one source). The AI-bot roster changes often; re-check against a maintained list (e.g. the official OpenAI/Anthropic/Perplexity crawler docs) when you run an engagement.
+
 - **Critical nuance:** blocking `GPTBot` only stops *training* use; **`OAI-SearchBot` is what lets ChatGPT Search cite you** — keep it allowed if you want AI citations. Same logic: `Googlebot`/`Bingbot` power AI Overviews and Copilot, so don't block them in the name of "AI opt-out". `Google-Extended` governs only Gemini *training*, not AI Overviews crawling.
 - **Training-bot tradeoff (an informed choice, not a default):** allowing `GPTBot`/`CCBot`/`Google-Extended` feeds the slow *memory* path (good for long-term recall) but gives content to model training. For most brands seeking visibility, allow them. If the client has IP concerns, you can allow the *search* bots (OAI-SearchBot, Googlebot, PerplexityBot, ClaudeBot) while disallowing the *training* bots — explain the trade.
+- **⚠️ Verify on the LIVE site, not just the repo file — this is the #1 silent failure.** Many hosts/CDNs **override or inject** robots.txt: Cloudflare's *AI Crawl Control / "Managed robots.txt"* and "Block AI bots" toggle, or Vercel/Netlify/Webflow settings, or a WAF user-agent rule, can serve a *different* robots — or block AI bots at the edge — no matter what you deployed. **Fetch the live robots AS an AI bot** and confirm it matches what you shipped:
+  ```bash
+  for ua in "OAI-SearchBot" "GPTBot" "ClaudeBot" "PerplexityBot"; do
+    echo "== $ua =="; curl -sA "$ua" "https://EXAMPLE.com/robots.txt" | head -40
+  done
+  curl -sA "OAI-SearchBot" -o /dev/null -w "key page as AI bot -> %{http_code}\n" "https://EXAMPLE.com/"
+  ```
+  If the AI-UA response differs from your file (an extra `Disallow: /`, a `Content-Signal: ai-train=no`, or a 403), the block is at the **CDN/host** — fix it in *that dashboard* (e.g. Cloudflare → AI Crawl Control → turn off Managed robots / Block AI bots), not in the repo. (This is exactly the failure mode where a perfect repo robots.txt is silently overridden at the edge.) Google Search Console → URL Inspection is a solid first-party render check.
 
 ## 2. sitemap.xml
 List every real page with the **canonical host**. No redirects/404s inside. Update when you add pages. Reference it in robots.txt.

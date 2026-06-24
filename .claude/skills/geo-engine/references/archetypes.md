@@ -11,6 +11,7 @@ The archetype set in Phase 0 decides the **priority order** of everything else. 
 | **SaaS / B2B** | You sell software/subscriptions to businesses | Comparison & "alternatives" pages · listicle inclusion · community presence (Reddit/HN/Slack) · docs | Organization, SoftwareApplication, FAQPage, Article |
 | **Ecommerce / product** | You sell physical/digital products | "Best X" listicles · marketplace & review-site presence · Product/Review schema | Product, Offer, Review, Organization |
 | **Publisher / content** | You're a media/content site monetizing attention | Answer-first articles with original reporting/data · author E-E-A-T · broad citation footprint | Article, Person (author), Organization |
+| **Directory / aggregator** | You aggregate *others'* entities — a listings site, marketplace, or "best of" hub | Be the canonical cited list: comprehensive / fresh / deduped coverage · per-listing structure · get the directory *itself* cited & into "best directories" lists | CollectionPage, ItemList, Dataset, Organization |
 
 ## How the levers shift by archetype
 
@@ -19,6 +20,7 @@ The archetype set in Phase 0 decides the **priority order** of everything else. 
 - **SaaS/B2B:** buyers ask AI "best tool for X" / "X vs Y" / "X alternatives". The win is owning comparison/alternatives pages on your own site *and* being present in third-party listicles, Reddit/HN threads, and review platforms (G2/Capterra) — those are what the LLM reads.
 - **Ecommerce:** AI shopping answers lean on review aggregators, marketplaces, and "best of" roundups far more than on the brand's own site. Win the off-site review/listicle footprint first; Product/Review schema second.
 - **Publisher:** you ARE the content. Win by being the most extractable, original, author-credentialed answer on your topics, cited widely enough to enter training data.
+- **Directory/aggregator:** AI loves to cite one comprehensive, well-structured list for "best/top/list of X" questions. The win is being *the* canonical — most complete, freshest, deduplicated — list in your niche, marked up with `ItemList`/`CollectionPage` so engines parse every entry, and itself cited in "best [category] directories" roundups. **Disambiguation:** a brand that aggregates *others'* entities is a directory **first**, even if it's also local — don't mis-route it to service/local; its lever is coverage + being cited, not its own reviews/GBP.
 
 ---
 
@@ -72,6 +74,6 @@ The build the off-site / original-data method came from. Different archetype, di
 **Lessons baked into the skill:**
 1. **Original data is the #1 weapon** for this archetype — it's content and outreach bait in one.
 2. **Fewer, denser pages win.** Pruning thin content is real GEO work, not destruction.
-3. **Off-site citations (esp. Reddit) are ~80% of the game** — the on-site work just makes you eligible.
+3. **Off-site citations (esp. Reddit) are the dominant lever** — the on-site work just makes you eligible.
 4. **Declare a license** (Dataset + CC-BY) to lower the friction of being cited.
 5. A brand-new, low-authority domain *can* start getting cited by AI within weeks if the data is genuinely original and the off-site work is real.

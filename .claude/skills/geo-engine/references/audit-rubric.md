@@ -23,11 +23,14 @@ curl -sA "Mozilla/5.0" "https://$DOMAIN/" \
 # 4) Do the GEO files exist?
 for f in robots.txt sitemap.xml llms.txt; do echo -n "$f -> "; curl -s -o /dev/null -w "%{http_code}\n" "https://$DOMAIN/$f"; done
 
-# 5) Are AI bots blocked? (look for Disallow targeting GPTBot/OAI-SearchBot/PerplexityBot/ClaudeBot)
-curl -s "https://$DOMAIN/robots.txt"
+# 5) Are AI bots blocked — fetched AS an AI bot? (catches CDN/edge overrides, e.g. Cloudflare AI Crawl Control)
+for ua in "OAI-SearchBot" "GPTBot" "ClaudeBot" "PerplexityBot"; do echo "== $ua =="; curl -sA "$ua" "https://$DOMAIN/robots.txt" | grep -iE "User-agent|Disallow|Content-Signal" | head; done
+curl -sA "OAI-SearchBot" -o /dev/null -w "homepage as AI bot -> %{http_code}\n" "https://$DOMAIN/"
 ```
 
 If words-in-raw-HTML is tiny but the live page is full of content, you've found a JS-only site — that alone explains most invisibility, and the fix (author citable pages as static HTML) is the headline recommendation. See `onsite-sop.md`.
+
+**If the robots fetched as an AI bot differs from a normal fetch** (an extra `Disallow: /`, a `Content-Signal: ai-train=no`, or a 403), the block is at the **CDN/host** (e.g. Cloudflare's *Managed robots.txt* / "Block AI bots"), not in the repo — fix it in that dashboard. This silent edge-override is a top cause of "I did everything on-site and AI still can't see me."
 
 ## Step 2 — Baseline the AI visibility
 
@@ -36,6 +39,14 @@ Before recommending anything, record where the brand stands today. For each targ
 ## Step 3 — Score the rubric
 
 Score each dimension **✅ OK / ⚠️ weak / ❌ missing**, grouped by the leverage hierarchy so the client sees *where the impact is*, not just a flat list. Note the evidence weight (🔑 strong / ◆ medium / ○ baseline).
+
+**How the score is computed (so the headline number is defensible and re-runnable):**
+- Per item: **✅ = 2 · ⚠️ = 1 · ❌ = 0**.
+- Group score = (sum of item points) ÷ (items × 2) → a %.
+- Group weight by leverage: **🔑 = 3 · ◆ = 2 · ○ = 1**. Groups A & B are 🔑; C, D, E are ◆; F is ○ (Σ weights = 13).
+- **Overall /100 = round( Σ(group % × weight) ÷ 13 × 100 )** — so a weak off-site (A) hurts far more than a weak F. That's the point.
+
+> *Worked example:* A 0% (all ❌) · B 83% · C 100% · D 83% · E 50% · F 90% → (0×3 + .83×3 + 1×2 + .83×2 + .5×2 + .9×1) ÷ 13 = **62/100**. Reads correctly: on-site is strong, but the empty off-site footprint caps the brand. Re-run monthly and this number is your progress metric.
 
 ### A. Off-site citation footprint 🔑 (the needle-mover — score honestly, it's usually the worst)
 1. Does anyone independent cite/link the brand? (Reddit, forums, blogs, news, directories)
@@ -68,7 +79,7 @@ Score each dimension **✅ OK / ⚠️ weak / ❌ missing**, grouped by the leve
 20. Two-name people reconciled (`alternateName`)?
 
 ### F. Crawl access & freshness ○
-21. robots.txt allows Googlebot, Bingbot, **OAI-SearchBot**, GPTBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot-Extended?
+21. robots.txt allows the AI bots (Googlebot, Bingbot, **OAI-SearchBot**, GPTBot, PerplexityBot, ClaudeBot, Claude-User, Google-Extended, Applebot-Extended, CCBot — canonical list in `onsite-sop.md` §1) — **and does the live fetch *as an AI bot* match the file** (no CDN/edge override)?
 22. sitemap.xml present, canonical host, no internal 404s/redirects?
 23. `llms.txt` present and accurate?
 24. Current-year figures and dated updates (freshness)?
@@ -102,9 +113,17 @@ and the realistic trajectory. Honest, outcome-framed, no guarantees.]
 | Prompt | ChatGPT | Perplexity | Gemini | AI Overviews | Who AI recommended |
 |---|---|---|---|---|---|
 
-## Scorecard
-[The rubric, grouped A–F, each dimension ✅/⚠️/❌ with a one-line note.
-Show the group scores so the leverage picture is obvious.]
+## Scorecard — [overall]/100
+[Lead with the weighted group table (makes the leverage obvious at a glance), then the per-item ✅/⚠️/❌ notes under each group.]
+| Group | Weight | Score | % | One-line read |
+|---|---|---|---|---|
+| A · Off-site citation footprint | 🔑 | _/10 | _% | |
+| B · Original data & content quality | 🔑 | _/6 | _% | |
+| C · Extractability | ◆ | _/10 | _% | |
+| D · Structured data | ◆ | _/6 | _% | |
+| E · Entity & authority | ◆ | _/8 | _% | |
+| F · Crawl access & freshness | ○ | _/10 | _% | |
+| **Overall** | | | **_/100** | |
 
 ## What's costing you the most
 [The 3–5 highest-impact gaps, each: the gap → why it matters for AI → the fix.]

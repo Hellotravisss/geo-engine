@@ -25,14 +25,16 @@ Every month, ask each prompt in **ChatGPT, Perplexity, Gemini, Google AI Overvie
 - **Alongside whom** (which competitors share the answer)
 - **What got cited** (which domains/pages the engine used)
 
-Tracker shape (one tab per engine, or one row per prompt×engine):
+**Sample enough that the number isn't noise.** AI answers vary run-to-run, so a single ask per prompt is a coin-flip, not a measurement. Run **each prompt ~3× per engine per month**, in fresh/logged-out sessions, and record the per-cell rate as **hits ÷ runs**. Log the **model/version and region** per run (engines swap models constantly).
 
-| Month | Prompt | Engine | Mentioned? | Linked? | Prominence | Competitors named | Source cited |
-|---|---|---|---|---|---|---|---|
+Tracker shape — one **append-only row per prompt × engine × run** (long format; every KPI and chart derives from this one file, so "archiving" = keeping it):
 
-Derive the headline KPI: **mention rate** and **link rate** = (# prompts where brand appears) / (total prompts), per engine, per month. That single trend line is the story you sell.
+| date | month | prompt_id | engine | run | mentioned | linked | prominence | competitors | source_cited | model_version | region |
+|---|---|---|---|---|---|---|---|---|---|---|---|
 
-> Run each prompt in a fresh/logged-out session where possible to reduce personalization skew. Note that engines change models frequently — record the date; don't over-read a single month's wobble.
+Derive the headline KPIs by **averaging**: mention rate / link rate = mean of per-prompt (hits ÷ runs), per engine and overall, per month. That trend line is the story you sell.
+
+> **Read the trend, not the wobble.** With ~20 prompts a month-over-month swing under ~±5–10 points is mostly sampling noise — only a **sustained 3+ month move** is signal. Tell the client this up front so a noisy month doesn't spook anyone.
 
 ## 3. The instrumented method (Ahrefs Brand Radar — the enterprise backbone)
 
@@ -53,7 +55,7 @@ Pull SOV + mentions history for the trend, and cited-domains for the niche to fe
 
 ## 4. Watch the logs (cheap corroboration)
 - **AI-referral traffic** — ChatGPT Search sends `utm_source=chatgpt.com`; Perplexity and others send referrers. Track in GA4 / Vercel Analytics / server logs.
-- **AI crawler hits** — watch for `OAI-SearchBot`, `PerplexityBot`, `ClaudeBot`, `GPTBot` in access logs; rising crawl = rising eligibility.
+- **AI crawler hits** — watch for the AI bots (`OAI-SearchBot`, `PerplexityBot`, `ClaudeBot`, `GPTBot`, … — full list in `onsite-sop.md` §1) in access logs; rising crawl = rising eligibility.
 - **GSC** — impressions/clicks/queries and which pages rank (AI Overviews draw from this index).
 
 ---

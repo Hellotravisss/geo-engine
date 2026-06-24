@@ -1,7 +1,7 @@
 ---
 name: geo-engine
-description: Professional Generative Engine Optimization (GEO / AEO) operator — get a brand cited, mentioned, and recommended by AI answer engines (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude, Copilot). Runs a full engagement: scope & baseline → scored audit → on-site implementation (AI-crawler access, llms.txt, structured data, answer-first content) → off-site citation building (Reddit, original-data outreach, HARO/Featured/Qwoted, Wikidata, listicles) → measurement & monthly AI-visibility reporting, with client-ready deliverables. Use this skill whenever the user mentions GEO, AEO, "AI SEO", LLM SEO, getting cited / mentioned / recommended by AI, AI search visibility, AI Overviews, share of voice in AI answers, llms.txt, brand visibility in ChatGPT / Perplexity / Gemini, or wants to audit or improve how a website or brand shows up in AI-generated answers — even if they don't say "GEO" explicitly. Also use when building a sellable GEO audit or retainer service for clients.
-version: 1.0.0
+description: Professional Generative Engine Optimization (GEO / AEO) operator — get a brand cited, mentioned, and recommended by AI answer engines (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude, Copilot). Runs a full engagement: scope & baseline → scored audit → on-site implementation (AI-crawler access, llms.txt, structured data, answer-first content) → off-site citation building (Reddit, original-data outreach, HARO/Featured/Qwoted, Wikidata, listicles) → measurement & monthly AI-visibility reporting, with client-ready deliverables. Use this skill whenever the user mentions GEO, AEO, "AI SEO", LLM SEO, getting cited / mentioned / recommended by AI, wanting to "rank in" / "show up in" / "get found by" / "appear in" ChatGPT, Perplexity, Gemini or other AI assistants, AI search visibility, AI Overviews, share of voice in AI answers, llms.txt, brand visibility in ChatGPT / Perplexity / Gemini, or wants to audit or improve how a website or brand shows up in AI-generated answers — even if they don't say "GEO" explicitly. Also use when building a sellable GEO audit or retainer service for clients.
+version: 1.1.0
 ---
 
 <!-- geo-engine — Generative Engine Optimization operator. Built from real engagements. -->
@@ -29,13 +29,13 @@ Everything in this skill ladders up to one of two mechanisms. Know which one you
 
 The single most common GEO mistake — including in most public "GEO checklists" — is to over-invest in cheap on-site tweaks (especially `llms.txt`) and skip the hard, high-leverage off-site work. Don't. Rank every recommendation by this, and tell the client honestly where the leverage is. Evidence strength noted in parentheses.
 
-1. **Being cited / mentioned in third-party corpora** 🔑 *(strong)* — ~80% of the outcome. Reddit, Wikipedia/Wikidata, listicles ("best X"), news, niche blogs. Feeds **both** retrieval and memory.
+1. **Being cited / mentioned in third-party corpora** 🔑 *(strong)* — **the dominant lever by far**: off-site citations move AI recommendations far more than any on-site tweak *(directional heuristic, not a measured split — don't quote a number)*. Reddit, Wikipedia/Wikidata, listicles ("best X"), news, niche blogs. Feeds **both** retrieval and memory.
 2. **Original data, statistics, and citations in your content** 💎 *(strong)* — content carrying specific numbers/stats/quoted sources is cited markedly more by LLMs (the Princeton *GEO* study found cite/quote/stat-rich content lifted source visibility by roughly 30–40% for those methods). Usually a brand's single biggest reusable weapon — it doubles as outreach bait.
 3. **Extractable answer structure** *(strong)* — question-shaped headings, the answer in the first sentence, tables / lists / FAQs. Makes you quotable on the retrieval path.
 4. **Structured data (schema.org)** *(medium)* — Organization, Dataset, FAQPage, Article, Service, Person. Helps machines parse and trust.
 5. **Entity & authority signals** *(medium)* — a Wikidata item, inclusion in "best of" lists, named authors with real credentials (E-E-A-T).
 6. **Freshness & specificity** *(medium)* — current-year figures, named entities, dated updates.
-7. **AI-crawler accessibility** *(baseline)* — don't block the bots that read you (GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot). Necessary, not sufficient.
+7. **AI-crawler accessibility** *(baseline)* — don't block the bots that read you (GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Claude-User, Google-Extended, Applebot-Extended, CCBot — **canonical current list in `onsite-sop.md` §1**). Necessary, not sufficient — and verify it on the *live* site: CDNs (e.g. Cloudflare's AI Crawl Control) can silently override your robots.txt.
 8. **`llms.txt`** *(weak / speculative)* — cheap, harmless, adds a clean machine-readable brand summary. No major engine has confirmed using it for ranking. Ship it; never sell it as the thing that works.
 
 > ⚠️ **There is no "guaranteed AI recommendation."** AI answers are non-deterministic and personalized — the same prompt yields different answers across users and days. GEO raises *probability*, not certainty. Anyone promising guaranteed placement is lying, and saying so plainly is part of being the professional in the room.
@@ -56,7 +56,7 @@ Run these in order for a full engagement; jump to any single phase when the user
 ### Phase 0 — Scope & baseline
 Establish the target before touching anything.
 1. **Brand & category.** What is it, who's it for, what's the site/URL, what does it sell?
-2. **Pick the archetype** — it determines the whole playbook. See `references/archetypes.md` (service/local business · data/tool product · SaaS · ecommerce · publisher/content). Most brands map cleanly to one.
+2. **Pick the archetype** — it determines the whole playbook. See `references/archetypes.md` (service/local business · data/tool product · SaaS · ecommerce · publisher/content · directory/aggregator). Most brands map cleanly to one — and a brand that **aggregates others' listings is a directory first**, even if it's also local.
 3. **Define the target prompts.** The 15–30 real questions where this brand *should* be recommended (mix of head + long-tail, and languages if relevant). These become both the strategy compass and the measurement set — capture them now.
 4. **Pull the baseline.** Ask each target prompt across ChatGPT / Perplexity / Gemini / Google AI Overviews / Claude today and record: mentioned? linked? alongside whom? what got cited instead? If Ahrefs Brand Radar (or similar) is connected, pull AI share-of-voice and cited-domains now — see `references/measurement.md`. **No baseline, no proof of value.**
 
@@ -69,7 +69,7 @@ Score the brand against the leverage hierarchy and turn it into a prioritized ro
 Make the brand eligible and maximally extractable. Do the work in the repo. Full SOP + copy-paste templates in **`references/onsite-sop.md`**; JSON-LD blocks in **`references/schema-library.md`**. Covers: `robots.txt` welcoming AI crawlers, `llms.txt`, structured data, answer-first content restructuring, original-data asset creation, internal linking, and freshness. Prune thin content as you go — fewer, denser, data-backed pages.
 
 ### Phase 3 — Off-site citation building (the real lever)
-This is where ~80% of the result is won, and where most competitors won't put in the work — your edge. Full playbook + pitch/answer templates in **`references/offsite-sop.md`**. Three fronts by ROI: **(1) Community** (Reddit + niche forums — answer with the brand's data, value-first, hard anti-spam rules), **(2) Original-data outreach** (journalists via HARO/Featured/Qwoted; resource-page and listicle inclusion — lead with citable data, never beg for links), **(3) Entity** (Wikidata item, "best of" list inclusion, quality directories). Personalized, value-first, one-at-a-time. This is a sustained program, not a one-off — frame it as the retainer.
+This is the dominant lever — where the result is mostly won, and where most competitors won't put in the work — your edge. Full playbook + pitch/answer templates in **`references/offsite-sop.md`**. Three fronts by ROI: **(1) Community** (Reddit + niche forums — answer with the brand's data, value-first, hard anti-spam rules), **(2) Original-data outreach** (journalists via HARO/Featured/Qwoted; resource-page and listicle inclusion — lead with citable data, never beg for links), **(3) Entity** (Wikidata item, "best of" list inclusion, quality directories). Personalized, value-first, one-at-a-time. This is a sustained program, not a one-off — frame it as the retainer.
 
 ### Phase 4 — Measure & report
 Prove it and keep proving it. Full method + the monthly **AI-Visibility Report** template in **`references/measurement.md`**. Re-run the Phase-0 target prompts on a fixed cadence (monthly) across all engines; track mention rate, link rate, share of voice vs. competitors, and which pages get cited. Use Ahrefs Brand Radar / GSC where available; manual prompt-testing always works as the floor. The report *is* the retainer deliverable and the case-study fuel for selling the next engagement.
@@ -85,6 +85,7 @@ The archetype sets the priority order. Confirm it in Phase 0, then read the matc
 | SaaS / B2B | Project-management app | Comparison & alternatives pages, listicle inclusion, Reddit/HN/community presence, docs |
 | Ecommerce / product | DTC brand | Product/Review schema, "best X" listicles, marketplace & review-site presence |
 | Publisher / content | Niche media site | Answer-first articles with original reporting/data, author E-E-A-T, broad citation footprint |
+| Directory / aggregator | End-of-life services directory | Be the canonical cited "list of X" — comprehensive, fresh, deduped listings; ItemList/CollectionPage + Dataset schema; get the directory itself cited & into "best directories" lists |
 
 ## Reference library
 

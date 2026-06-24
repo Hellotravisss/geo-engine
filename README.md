@@ -34,7 +34,7 @@ When someone asks an AI *"best Canadian take-home pay calculator"* or *"architec
 
 ## Archetypes it covers
 
-Service/local business · data/tool product · SaaS/B2B · ecommerce · publisher/content — each with its own priority order and copy-paste schema.
+Service/local business · data/tool product · SaaS/B2B · ecommerce · publisher/content · directory/aggregator — each with its own priority order and copy-paste schema.
 
 ## Case studies (the method, applied to real sites)
 

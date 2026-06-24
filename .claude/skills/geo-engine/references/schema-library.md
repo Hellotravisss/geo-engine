@@ -11,6 +11,7 @@ Machine-readable facts about the entity. **Only mark up what's visibly true on t
 | SaaS / B2B | `Organization` + `SoftwareApplication` | `FAQPage`; `Article`; comparison pages |
 | Ecommerce | `Organization` | `Product` + `Offer` + `Review`/`AggregateRating` (only if real) |
 | Publisher | `Organization` | `Article` + `Person` (author) + `BreadcrumbList` |
+| Directory / aggregator | `Organization` + `CollectionPage` | `CollectionPage` + `ItemList` (the listings) + `Dataset` (if you publish the data); per-item `LocalBusiness`/`Product`/`Organization` |
 
 ---
 
@@ -153,6 +154,24 @@ The CC-BY license is an explicit "you may cite this" — lowers the friction of 
   "description":"The quotable finding in one line." }
 </script>
 ```
+
+## Directory / aggregator — CollectionPage + ItemList
+For a listings/directory page, declare the list and its items so engines can lift the whole set as the answer.
+```html
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"CollectionPage",
+  "@id":"https://EXAMPLE.com/best-X-in-CITY",
+  "name":"Best X in CITY (2026)","description":"What the list covers and how entries are chosen.",
+  "isPartOf":{"@type":"WebSite","name":"BRAND","url":"https://EXAMPLE.com/"},
+  "mainEntity":{ "@type":"ItemList","numberOfItems":3,
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"item":{"@type":"LocalBusiness","name":"Entry One","url":"https://entry-one.com","address":{"@type":"PostalAddress","addressLocality":"CITY"}}},
+      {"@type":"ListItem","position":2,"item":{"@type":"LocalBusiness","name":"Entry Two","url":"https://entry-two.com"}},
+      {"@type":"ListItem","position":3,"item":{"@type":"LocalBusiness","name":"Entry Three","url":"https://entry-three.com"}}
+    ] } }
+</script>
+```
+Swap the inner item `@type` to what you actually list (`Product`, `Organization`, `Service`, …). If you publish the underlying data, add a `Dataset` too (see the data/tool block) — a downloadable, attributable list is highly citable.
 
 ## Common pitfalls
 - Values must match visible text. No invented reviews/ratings/services/prices.
