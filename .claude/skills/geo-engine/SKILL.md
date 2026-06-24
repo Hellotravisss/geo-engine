@@ -1,7 +1,7 @@
 ---
 name: geo-engine
 description: Professional Generative Engine Optimization (GEO / AEO) operator — get a brand cited, mentioned, and recommended by AI answer engines (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude, Copilot). Runs a full engagement: scope & baseline → scored audit → on-site implementation (AI-crawler access, llms.txt, structured data, answer-first content) → off-site citation building (Reddit, original-data outreach, HARO/Featured/Qwoted, Wikidata, listicles) → measurement & monthly AI-visibility reporting, with client-ready deliverables. Use this skill whenever the user mentions GEO, AEO, "AI SEO", LLM SEO, getting cited / mentioned / recommended by AI, wanting to "rank in" / "show up in" / "get found by" / "appear in" ChatGPT, Perplexity, Gemini or other AI assistants, AI search visibility, AI Overviews, share of voice in AI answers, llms.txt, brand visibility in ChatGPT / Perplexity / Gemini, or wants to audit or improve how a website or brand shows up in AI-generated answers — even if they don't say "GEO" explicitly. Also use when building a sellable GEO audit or retainer service for clients.
-version: 1.1.0
+version: 1.2.0
 ---
 
 <!-- geo-engine — Generative Engine Optimization operator. Built from real engagements. -->
@@ -57,7 +57,7 @@ Run these in order for a full engagement; jump to any single phase when the user
 Establish the target before touching anything.
 1. **Brand & category.** What is it, who's it for, what's the site/URL, what does it sell?
 2. **Pick the archetype** — it determines the whole playbook. See `references/archetypes.md` (service/local business · data/tool product · SaaS · ecommerce · publisher/content · directory/aggregator). Most brands map cleanly to one — and a brand that **aggregates others' listings is a directory first**, even if it's also local.
-3. **Define the target prompts.** The 15–30 real questions where this brand *should* be recommended (mix of head + long-tail, and languages if relevant). These become both the strategy compass and the measurement set — capture them now.
+3. **Define the target prompts.** The 15–30 real questions where this brand *should* be recommended (mix of head + long-tail, and languages if relevant). These become both the strategy compass and the measurement set — capture them now. **For China / Chinese-market or bilingual brands, read `references/i18n.md` first — the target engines and the whole leverage hierarchy change.**
 4. **Pull the baseline.** Ask each target prompt across ChatGPT / Perplexity / Gemini / Google AI Overviews / Claude today and record: mentioned? linked? alongside whom? what got cited instead? If Ahrefs Brand Radar (or similar) is connected, pull AI share-of-voice and cited-domains now — see `references/measurement.md`. **No baseline, no proof of value.**
 
 Output: a short scoping note — brand, archetype, target-prompt list, baseline visibility snapshot.
@@ -97,6 +97,7 @@ Read the file for the phase you're in — don't load everything at once.
 - `references/schema-library.md` — copy-paste JSON-LD for every archetype (Phase 2).
 - `references/offsite-sop.md` — Reddit + outreach + HARO + Wikidata + listicles, with pitch/answer templates and the rules that keep accounts alive (Phase 3).
 - `references/measurement.md` — prompt-test set, tracker, Ahrefs Brand Radar integration, monthly AI-Visibility Report template (Phase 0 & 4).
+- `references/i18n.md` — international / domestic-market GEO: Chinese engines (豆包/Kimi/DeepSeek/文心/Baidu) and the platform-first leverage shift (小红书/知乎/B站/公众号). Read when the audience is Chinese or the brand is bilingual.
 
 ## Content-quality red lines (GEO and Google both enforce these)
 

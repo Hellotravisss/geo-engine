@@ -34,6 +34,12 @@ Tracker shape — one **append-only row per prompt × engine × run** (long form
 
 Derive the headline KPIs by **averaging**: mention rate / link rate = mean of per-prompt (hits ÷ runs), per engine and overall, per month. That trend line is the story you sell.
 
+**KPI definitions (so the client can reproduce them):**
+- **Mention / link rate** = mean of per-prompt (hits ÷ runs), per engine, then averaged across engines.
+- **Share of voice (SOV)** = your mentions ÷ (your + named competitors') mentions across the prompt set. **Fix the competitor set in Phase 0 and keep it constant** — SOV is meaningless if the comparison set drifts.
+- **AI-referral sessions** = sessions whose referrer/UTM is on this allowlist: `chatgpt.com`, `perplexity.ai`, `gemini.google.com`, `copilot.microsoft.com`, `claude.ai` (extend as engines add referrers). Track in GA4 / Vercel / server logs.
+- **Pages cited by AI** = distinct URLs in the tracker's `source_cited` column for the month.
+
 > **Read the trend, not the wobble.** With ~20 prompts a month-over-month swing under ~±5–10 points is mostly sampling noise — only a **sustained 3+ month move** is signal. Tell the client this up front so a noisy month doesn't spook anyone.
 
 ## 3. The instrumented method (Ahrefs Brand Radar — the enterprise backbone)
@@ -69,6 +75,14 @@ Keep it one page of signal. Lead with the trend, then the why, then next month's
 
 ## Headline
 [1–2 sentences: mention rate this month vs last, SOV vs competitors, the single biggest move.]
+
+## Trend (the renewal argument — lead with this)
+Mention rate + SOV by month since the baseline. **Plot it** (render a line chart if a chart tool is available); a rising line over 3+ months is what renews the retainer. The first report's "Last month" below = the **baseline (month 0)** captured in the audit.
+| Month | Mention rate | Link rate | SOV | AI-referral |
+|---|---|---|---|---|
+| Baseline (month 0) |  |  |  |  |
+| Month 1 |  |  |  |  |
+| … |  |  |  |  |
 
 ## Scoreboard
 | KPI | This month | Last month | Δ |

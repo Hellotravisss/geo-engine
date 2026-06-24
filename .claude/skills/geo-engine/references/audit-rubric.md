@@ -113,6 +113,8 @@ and the realistic trajectory. Honest, outcome-framed, no guarantees.]
 | Prompt | ChatGPT | Perplexity | Gemini | AI Overviews | Who AI recommended |
 |---|---|---|---|---|---|
 
+> **Reduce this baseline to the same KPIs as the monthly report** (mention rate, link rate, SOV) and store it as **"month 0"** in the tracker — so the first monthly report has a real "last month" to compare against, and every later report can show "vs baseline." This is what turns the audit into the first data point of the retainer's trend line.
+
 ## Scorecard — [overall]/100
 [Lead with the weighted group table (makes the leverage obvious at a glance), then the per-item ✅/⚠️/❌ notes under each group.]
 | Group | Weight | Score | % | One-line read |

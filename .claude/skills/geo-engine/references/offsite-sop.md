@@ -19,6 +19,12 @@ Google and OpenAI have data deals with Reddit, and LLMs cite Reddit heavily. A g
 4. **Removed once → go text-only** in that sub (still brand-valuable), retry links in two weeks.
 5. **Never start promo threads.** Only answer others' questions. A site link in your profile bio is fine.
 
+### Find & vet the subreddit (before you ever post)
+Don't assume which subs — find and qualify them first:
+- Surface where the questions are actually asked: search `site:reddit.com <your target question>` on Google, and Reddit's own search sorted by new.
+- **Read each sub's rules + wiki** for self-promotion limits — many enforce a 9:1 "mostly-not-your-own-stuff" ratio, an outright promo ban, or link restrictions; and check **account-age + karma gates** before you post (new/low-karma accounts get auto-removed).
+- Picked the wrong sub once (removed) → go text-only there (still brand-valuable) and retry links in ~2 weeks.
+
 ### Daily 10-minute workflow
 Keep a set of saved searches (sorted newest + relevant) for the subs where the target questions get asked. Pick 1–3 threads that have a real question and no good answer yet, and answer with the brand's real data.
 
@@ -50,6 +56,11 @@ These are link schemes Google explicitly targets.
 ### 2a. Journalists / press (free, top quality)
 Register the founder on journalist-request platforms and respond — as the brand's expert — to relevant queries, attaching the brand's data article as the source. One mention in a real outlet beats 100 directory links.
 - **Featured.com** (HARO's successor), **Qwoted**, **SourceBottle** (region-dependent).
+
+**Response template (1–2 sentences they can quote verbatim):**
+> [Direct, quotable answer leading with a concrete number.] *"In 2026 a full-time minimum-wage worker in Nunavut keeps $34,098 vs $26,478 in Alberta — a $7,620 gap."* Source: [link to your data page]. — [Name], [one-line credential].
+
+**Rules:** hit the deadline (queries close in hours), send **one tight pitch** not a wall, be a **genuine expert** on that exact topic, and **never fabricate a figure or a credential**. Skip pay-to-pitch "get featured" upsells and AI-mass-pitching — both get you blacklisted by the journalists who actually matter.
 - Respond fast, lead with a concrete data point, attach the citable URL.
 
 ### 2b. Resource-page & tool-list inclusion (scalable, mid-quality)
