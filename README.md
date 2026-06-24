@@ -6,11 +6,11 @@ When someone asks an AI *"best Canadian take-home pay calculator"* or *"architec
 
 ## The one idea most "GEO checklists" miss
 
-> **Off-site citations are ~80% of the result.** On-site work (schema, `llms.txt`, answer-first content) only makes you *eligible*. What actually moves AI recommendations is how many trusted places across the web cite or mention you — Reddit, "best-of" listicles, Wikidata, journalist/data mentions. This skill leads with that, and grades every recommendation by **evidence strength** — no hype, and no "guaranteed AI placement" (AI answers are non-deterministic and personalized).
+> **Off-site citations are the dominant lever — by far.** On-site work (schema, `llms.txt`, answer-first content) only makes you *eligible*. What actually moves AI recommendations is how many trusted places across the web cite or mention you — Reddit, "best-of" listicles, Wikidata, journalist/data mentions. This skill leads with that, and grades every recommendation by **evidence strength** — no hype, and no "guaranteed AI placement" (AI answers are non-deterministic and personalized).
 
 ## The leverage hierarchy (lead with the top, not the bottom)
 
-1. 🔑 **Being cited / mentioned in third-party corpora** — ~80% of the outcome (Reddit, Wikipedia/Wikidata, listicles, news).
+1. 🔑 **Being cited / mentioned in third-party corpora** — the dominant lever by far (Reddit, Wikipedia/Wikidata, listicles, news).
 2. 💎 **Original data, statistics & citations in your content** — markedly more likely to be cited by LLMs; doubles as outreach bait.
 3. **Extractable answer structure** — answer-first, question-shaped headings, tables/FAQs.
 4. **Structured data** (schema.org), 5. **Entity & authority** (Wikidata, E-E-A-T), 6. **Freshness**, 7. **AI-crawler access**.
