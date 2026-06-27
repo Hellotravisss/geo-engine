@@ -12,6 +12,7 @@ The archetype set in Phase 0 decides the **priority order** of everything else. 
 | **Ecommerce / product** | You sell physical/digital products | "Best X" listicles · marketplace & review-site presence · Product/Review schema | Product, Offer, Review, Organization |
 | **Publisher / content** | You're a media/content site monetizing attention | Answer-first articles with original reporting/data · author E-E-A-T · broad citation footprint | Article, Person (author), Organization |
 | **Directory / aggregator** | You aggregate *others'* entities — a listings site, marketplace, or "best of" hub | Be the canonical cited list: comprehensive / fresh / deduped coverage · per-listing structure · get the directory *itself* cited & into "best directories" lists | CollectionPage, ItemList, Dataset, Organization |
+| **Personal brand / entity** | You ARE the product — a person or brand name with **no website, or a thin one that isn't the lever** (founder, expert, KOL, local doctor/lawyer/photographer, a product/brand name with little owned web presence) | **Clean knowledge-graph entity** (Wikidata + 百度百科) · consistent name/bio/headshot across every profile with `sameAs` · earned third-party mentions (interviews, bylines, podcasts, "top-X" listicles, awards) | Person *or* Organization/Brand, ProfilePage; entity-IDs over site schema |
 
 ## How the levers shift by archetype
 
@@ -21,6 +22,48 @@ The archetype set in Phase 0 decides the **priority order** of everything else. 
 - **Ecommerce:** AI shopping answers lean on review aggregators, marketplaces, and "best of" roundups far more than on the brand's own site. Win the off-site review/listicle footprint first; Product/Review schema second.
 - **Publisher:** you ARE the content. Win by being the most extractable, original, author-credentialed answer on your topics, cited widely enough to enter training data.
 - **Directory/aggregator:** AI loves to cite one comprehensive, well-structured list for "best/top/list of X" questions. The win is being *the* canonical — most complete, freshest, deduplicated — list in your niche, marked up with `ItemList`/`CollectionPage` so engines parse every entry, and itself cited in "best [category] directories" roundups. **Disambiguation:** a brand that aggregates *others'* entities is a directory **first**, even if it's also local — don't mis-route it to service/local; its lever is coverage + being cited, not its own reviews/GBP.
+- **Personal brand / entity:** there is *no site to optimize* — the **entity is the product**. AI recommends an entity it can resolve cleanly (one consistent person/brand across the knowledge graph and every profile) and that authoritative third parties keep mentioning. The win is a clean Wikidata (+ 百度百科) item plus airtight name/bio/role consistency everywhere, then a steady stream of earned mentions (interviews, bylines, podcasts, "top-X" listicles, awards, association directories). On-site work is near-irrelevant; **link rate is near-zero by design** — weight *mention rate* and *entity correctness* instead. See the detailed section below.
+
+---
+
+# Personal brand / entity — when there's no website to optimize
+
+The rest of this skill assumes an owned site you can edit. This archetype is the case where **the client is a person or a brand name, not a website** — a founder, expert, KOL, local professional (doctor, lawyer, photographer), or a product/brand with little or no owned web presence. The whole method shifts: you can't restructure pages or ship schema on a site you don't have. **The entity itself is the surface you optimize.**
+
+> Core thesis, restated for this case: *off-site footprint is still the dominant lever — but the on-site half of the playbook is replaced by **building and cleaning the entity** so engines can resolve "who/what is this" with confidence.* An entity AI can't resolve cleanly never gets recommended, no matter how many mentions it has.
+
+## The three levers (in priority order)
+
+**1. Build & clean a knowledge-graph entity** 🔑 *(strong)* — the closest thing this archetype has to "on-site", and the foundation everything else points at.
+- **Wikidata item** (+ **百度百科** for CN). Set **`P31` instance-of** (human / business / brand), **`P856` official website** *if any*, and **external-ID properties** (LinkedIn, Crunchbase, GitHub, ORCID, IMDb, app-store IDs) as `sameAs` anchors — **every statement referenced** to an independent source. ⚠️ Bare promotional items with no independent sources get flagged and deleted — only create one you can reference.
+- **Profile consistency across every surface** — identical **name, one-line bio, headshot, and role/title** on LinkedIn, Crunchbase, GitHub, app stores, professional directories, association pages, social profiles. Cross-link them (`sameAs`/profile links) so they reinforce one entity instead of splitting it. A photographer listed as "Machine Operator" on LinkedIn is an entity fighting its own brand (see Case study 1).
+- This is where the discipline from `onsite-sop.md`'s "entity sentence" applies — write one canonical entity sentence and use it **verbatim** everywhere.
+
+**2. Earn authoritative third-party mentions** 🔑 *(strong)* — the dominant lever, same as every archetype, but here it carries even more weight because there's no owned content to fall back on. The kinds AI engines actually cite:
+- Interviews, guest bylines / op-eds, podcast appearances, "best/top {role/topic}" listicles, awards, and **inclusion in association / professional directories**.
+- Run **Front 1 (community)** and **Front 2 (original-data / editorial outreach)** from `offsite-sop.md` exactly as written — value-first, one-at-a-time, never fabricated. The person's own expertise (a quotable take, a real credential, original analysis) is the bait in place of a data asset.
+
+**3. Platform content for CN / bilingual** *(strong, when relevant)* — per `references/i18n.md`: 小红书 笔记 / 知乎 answers / B站 视频 / 公众号 文章 that the domestic engines retrieve, plus **百度百科** as the entity anchor and **高德 / 百度地图** business listing for local people (doctor, lawyer, photographer). Same value-first rules, different venues.
+
+## The anchor problem (this archetype's defining move)
+
+With no owned site, the entity has **no surface you control to verify itself** — every profile is on someone else's platform. So **designate ONE controllable anchor** as the self-citation hub: a single landing page (even a one-pager / link-in-bio) **or**, if there's truly no site, the **LinkedIn** profile **or** the **百度百科** entry. Point every other profile's `sameAs`/link at it, and use it as `P856` on Wikidata. The anchor is what lets engines (and Wikidata reviewers) tie the scattered profiles into one resolvable entity. One anchor, consistent everywhere — not five half-maintained ones.
+
+## Target questions (the Phase-0 prompt set for a person)
+
+- **best / top {role} in {place}** — "best architectural photographer in Vancouver", "top startup lawyer in SF".
+- **who is the expert on {topic}** — "who should I follow on {niche}", "leading voice in {field}".
+- **branded-name disambiguation** — "who is {Name}", "is {Name} the {role}" — especially when the name is common or collides with others. Getting the engine to return *your* person for the name is half the battle.
+
+## Measurement (it still applies — just re-weighted)
+
+Same machinery as `measurement.md` (mention rate / SOV / link rate per engine, fixed prompt set, monthly cadence) — but **link rate may be near-zero by design** (no site to link). Don't read that as failure. **Weight mention rate and entity correctness instead**: is the engine returning *this* person/brand for the name and the "best {role}" prompts, with accurate bio/role/affiliation? Entity correctness (right person, right facts, no confusion with a namesake) is a first-class KPI here, not link rate.
+
+## Red lines (reinforced for this archetype)
+
+- ❌ **No fabricated credentials, awards, or reviews.** A person's authority is the whole asset — one invented credential that gets caught burns it permanently, and editors/engines increasingly catch it.
+- ❌ **No buying or spamming engagement** to manufacture mentions.
+- ⛔ **Recognition is not recommendation.** A grey-hat tactic in the CN market: paying crowds to open 豆包 and query a brand/person so the engine "sees" the name a lot. **This is NOT the method.** It manufactures *recognition*, not *recommendation* — it's gameable, leaves no durable citation, and the engines discount coordinated query patterns the same way Google discounts link schemes. The durable play is **earned citations + a clean entity** — those survive the next model update; faked query volume doesn't.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: geo-engine
 description: Professional Generative Engine Optimization (GEO / AEO) operator — get a brand cited, mentioned, and recommended by AI answer engines (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude, Copilot). Runs a full engagement: scope & baseline → scored audit → on-site implementation (AI-crawler access, llms.txt, structured data, answer-first content) → off-site citation building (Reddit, original-data outreach, HARO/Featured/Qwoted, Wikidata, listicles) → measurement & monthly AI-visibility reporting, with client-ready deliverables. Use this skill whenever the user mentions GEO (Generative Engine Optimization — the AI-search sense, not geography), AEO, "AI SEO", LLM SEO, getting cited / mentioned / recommended by AI, wanting to "rank in" / "show up in" / "get found by" / "appear in" ChatGPT, Perplexity, Gemini or other AI assistants, AI search visibility, AI Overviews, share of voice in AI answers, llms.txt, brand visibility in ChatGPT / Perplexity / Gemini, or wants to audit or improve how a website or brand shows up in AI-generated answers — even if they don't say "GEO" explicitly. Also use when building a sellable GEO audit or retainer service for clients.
-version: 1.3.1
+version: 1.4.0
 ---
 
 <!-- geo-engine — Generative Engine Optimization operator. Built from real engagements. -->
@@ -56,7 +56,7 @@ Run these in order for a full engagement; jump to any single phase when the user
 ### Phase 0 — Scope & baseline
 Establish the target before touching anything.
 1. **Brand & category.** What is it, who's it for, what's the site/URL, what does it sell?
-2. **Pick the archetype** — it determines the whole playbook. See `references/archetypes.md` (service/local business · data/tool product · SaaS · ecommerce · publisher/content · directory/aggregator). Most brands map cleanly to one — and a brand that **aggregates others' listings is a directory first**, even if it's also local.
+2. **Pick the archetype** — it determines the whole playbook. See `references/archetypes.md` (service/local business · data/tool product · SaaS · ecommerce · publisher/content · directory/aggregator · personal brand / entity). Most brands map cleanly to one — a brand that **aggregates others' listings is a directory first**, even if it's also local, and a client who **is a person or brand name with no real website is a personal-brand / entity case** (optimize the entity, not a site).
 3. **Define the target prompts.** The 15–30 real questions where this brand *should* be recommended (mix of head + long-tail, and languages if relevant). These become both the strategy compass and the measurement set — capture them now. **For China / Chinese-market or bilingual brands, read `references/i18n.md` first — the target engines and the whole leverage hierarchy change.**
 4. **Pull the baseline.** Ask each target prompt across ChatGPT / Perplexity / Gemini / Google AI Overviews / Claude today and record: mentioned? linked? alongside whom? what got cited instead? If Ahrefs Brand Radar (or similar) is connected, pull AI share-of-voice and cited-domains now — see `references/measurement.md`. **No baseline, no proof of value.**
 
@@ -86,6 +86,7 @@ The archetype sets the priority order. Confirm it in Phase 0, then read the matc
 | Ecommerce / product | DTC brand | Product/Review schema, "best X" listicles, marketplace & review-site presence |
 | Publisher / content | Niche media site | Answer-first articles with original reporting/data, author E-E-A-T, broad citation footprint |
 | Directory / aggregator | End-of-life services directory | Be the canonical cited "list of X" — comprehensive, fresh, deduped listings; ItemList/CollectionPage + Dataset schema; get the directory itself cited & into "best directories" lists |
+| Personal brand / entity | Founder, expert, KOL, local doctor/lawyer | **No site to optimize — the entity is the product.** Clean Wikidata (+ 百度百科) item; consistent name/bio/role across every profile (sameAs); earned third-party mentions; one controllable anchor as the self-citation hub |
 
 ## Reference library
 

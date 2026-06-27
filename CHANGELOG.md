@@ -2,6 +2,14 @@
 
 All notable changes to **geo-engine**. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.4.0] — 2026-06-27
+### Added
+- **New archetype: Personal brand / entity** — for clients who are a person or brand name with **no website (or a thin one that isn't the lever)**: founders, experts, KOLs, local professionals (doctors, lawyers, photographers), product/brand names with little owned web presence. Added across `SKILL.md` (Phase-0 enumeration + the archetype quick-reference table) and `references/archetypes.md` (quick-selector row, levers bullet, and a full teaching section).
+  - The method shifts: **the entity is the product, not a site.** Levers: (1) build & clean a knowledge-graph entity — Wikidata (+ 百度百科 for CN) with referenced `P31`/`P856`/external-IDs, plus consistent name/bio/headshot/role across every profile with `sameAs` cross-links; (2) earn authoritative third-party mentions (interviews, bylines, podcasts, "top-X" listicles, awards, association directories); (3) CN/bilingual platform content per `references/i18n.md`.
+  - The **anchor problem**: with no owned surface, designate ONE controllable anchor (a landing page, or a LinkedIn / 百度百科 entry) as the self-citation hub all profiles point at.
+  - Target questions for a person: *best/top {role} in {place}*, *who is the expert on {topic}*, branded-name disambiguation. Measurement still applies but **link rate is near-zero by design** — weight mention rate and entity correctness.
+  - Red lines reinforced: no fabricated credentials/reviews, no bought/spammed engagement; explicitly contrasts the CN grey-hat tactic of paying crowds to query 豆包 (recognition ≠ recommendation, gameable, gets discounted) against the durable play of earned citations + a clean entity.
+
 ## [1.3.1] — 2026-06-23
 Tier-3 polish: GEO acronym disambiguated in the trigger description (fewer geography false-positives) + colloquial trigger verbs; `sr-only` hidden-H1 cloaking guardrail; honesty hedges (retrieval path dominant in 2026; structured data is "mostly hygiene", limited direct citation evidence).
 
