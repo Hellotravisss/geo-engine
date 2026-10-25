@@ -2,6 +2,22 @@
 
 All notable changes to **geo-engine**. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.5.0] — 2026-10-24
+### Added
+- **`references/operator-playbook.md`** — what the consultant must ask the client for on day one (access with lead times you don't control), facts only the owner knows, explaining GEO to an owner who knows SEO, honest timing, and the Canadian outreach law (CASL) with the evidence log it requires.
+- **Three mention states** — record each engine as *absent*, *present & correct*, or *present & wrong*. A confidently wrong description is the most urgent finding in an audit.
+- **Name-collision check** as the first step of Phase 0.
+- **Per-bot crawler table** in the audit (`OAI-SearchBot`, `Claude-SearchBot`, `PerplexityBot`, Google-Extended…) and an auth-gate check: a login middleware that 307s `/robots.txt` hides the whole site from every AI crawler.
+- **Bing Webmaster Tools + IndexNow on day one** — ChatGPT Search retrieves from Bing's index.
+- **Google preferred sources** (§9b): what it is, and why it is not a ranking signal.
+- **`address` vs `areaServed`** in the schema library — the registered city and the cities served are different layers.
+- **Platform traps** in the off-site SOP: Wikipedia, Commons, OpenStreetMap, GBP, Trustpilot, G2, Crunchbase, 百度百科, Hacker News, Reddit.
+- **Bilingual delivery**: run one audit and translate it; never two runs that contradict each other. The bilingual gap ("not ranked low — absent") as the opening.
+- **AI-referral traffic is a floor, never a total** — most of it lands in Direct.
+
+### Changed
+- README: animated hero and engagement diagram (`scripts/make-assets.py`), paired with [does-ai-know-you](https://github.com/Hellotravisss/does-ai-know-you) for measurement.
+
 ## [1.4.0] — 2026-06-27
 ### Added
 - **New archetype: Personal brand / entity** — for clients who are a person or brand name with **no website (or a thin one that isn't the lever)**: founders, experts, KOLs, local professionals (doctors, lawyers, photographers), product/brand names with little owned web presence. Added across `SKILL.md` (Phase-0 enumeration + the archetype quick-reference table) and `references/archetypes.md` (quick-selector row, levers bullet, and a full teaching section).

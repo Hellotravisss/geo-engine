@@ -24,7 +24,7 @@ curl -sA "Mozilla/5.0" "https://$DOMAIN/" \
 for f in robots.txt sitemap.xml llms.txt; do echo -n "$f -> "; curl -s -o /dev/null -w "%{http_code}\n" "https://$DOMAIN/$f"; done
 
 # 5) Are AI bots blocked — fetched AS an AI bot? (catches CDN/edge overrides, e.g. Cloudflare AI Crawl Control)
-for ua in "OAI-SearchBot" "GPTBot" "ClaudeBot" "PerplexityBot"; do echo "== $ua =="; curl -sA "$ua" "https://$DOMAIN/robots.txt" | grep -iE "User-agent|Disallow|Content-Signal" | head; done
+for ua in "OAI-SearchBot" "GPTBot" "Claude-SearchBot" "ClaudeBot" "PerplexityBot"; do echo "== $ua =="; curl -sA "$ua" "https://$DOMAIN/robots.txt" | grep -iE "User-agent|Disallow|Content-Signal" | head; done
 curl -sA "OAI-SearchBot" -o /dev/null -w "homepage as AI bot -> %{http_code}\n" "https://$DOMAIN/"
 ```
 
@@ -82,10 +82,40 @@ Score each dimension **✅ OK / ⚠️ weak / ❌ missing**, grouped by the leve
 ### F. Crawl access & freshness ○
 21. robots.txt allows the AI bots (Googlebot, Bingbot, **OAI-SearchBot**, GPTBot, PerplexityBot, ClaudeBot, Claude-User, Google-Extended, Applebot-Extended, CCBot — canonical list in `onsite-sop.md` §1) — **and does the live fetch *as an AI bot* match the file** (no CDN/edge override)?
 22. sitemap.xml present, canonical host, no internal 404s/redirects?
-23. `llms.txt` present and accurate?
+22b. **Actually IN Bing's index, and submitted to Bing Webmaster Tools?** Not the same question as
+    22 — a sitemap that exists but was never submitted, on a site Bing has not indexed, is a sitemap
+    nobody read. This matters far beyond Bing traffic: **ChatGPT Search retrieves from Bing's index**,
+    so absence here caps ChatGPT visibility no matter how good the on-site work is. Pair it with 21:
+    index membership AND `OAI-SearchBot` access are BOTH required; failing either makes the site
+    invisible in ChatGPT.
+
+    ⚠️ **This check cannot be automated — do it by hand.** Verified 2026-08-10: `curl` against
+    bing.com returns a bot page for every domain (a nonsense control domain gave byte-identical
+    output to real ones), and an automated browser gets a CAPTCHA. Any scripted "site: result count"
+    will report *not indexed* for every client, including correctly-indexed ones. Do not write one.
+
+    **How to actually check:** type `site:example.com` into Bing in a normal browser, or read it
+    from Bing Webmaster Tools once the property is verified (authoritative, and the only one that
+    also shows crawl errors).
+
+    ⚠️ **Reading the result is the part people get wrong.** When Bing has nothing for the domain it
+    often does *not* say "no results" — it silently rewrites the query and shows unrelated pages
+    (searching `site:avowd.ai` returned Orient Express results). Unrelated results are the signal
+    for *not indexed*; only pages **on that domain** count as indexed.
+22c. **Google Search Console → 「Search generative AI」 control set to include** (added by Google 2026-08-31;
+    include / exclude / inherit). It decides eligibility for AI Overviews, AI Mode and Discover's generative
+    features. Not a ranking signal, separate from `Google-Extended`. A client who clicked "exclude" is out of
+    AIO/AI Mode no matter what else we fix — check it in the first week, it needs the owner's GSC access.
+23. `llms.txt` present and accurate? **Report only, zero weight.** Google's AI optimization guide (developers.google.com/search/docs/fundamentals/ai-optimization-guide, verified 2026-10-23) says Search does not use llms.txt or other AI text files, and lists "chunking" and inauthentic mentions as hacks to ignore. Never sell llms.txt as a lever; it is a cheap courtesy for non-Google crawlers.
 24. Current-year figures and dated updates (freshness)?
 25. HTTPS, fast, mobile-clean, single host (www OR apex consistently)?
 
+> **Check each bot for its own claim (2026-10-23, from claude-seo's crawler table, matches vendor docs):**
+> `OAI-SearchBot` = ChatGPT Search citability · `GPTBot` = OpenAI training only ·
+> `Claude-SearchBot` = Claude search citability · `ClaudeBot` = Anthropic training only ·
+> `Googlebot` = Google Search **and AI Overviews / AI Mode** · `Google-Extended` = Gemini/Vertex training & grounding only — a blocked Google-Extended is NOT evidence of missing from AIO ·
+> `Applebot-Extended` = Apple Intelligence training opt-out only. Never merge training and citation bots into one line.
+>
 > Reminder of the OAI-SearchBot nuance: blocking `GPTBot` only stops training use, but **`OAI-SearchBot` is what lets ChatGPT Search cite you** — flag it as a problem only if the citation-driving bots are blocked.
 
 ## Step 4 — Prioritize (impact × effort)

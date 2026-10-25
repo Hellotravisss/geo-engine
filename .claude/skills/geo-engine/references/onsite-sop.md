@@ -59,6 +59,7 @@ Sitemap: https://EXAMPLE.com/sitemap.xml
 
 - **Critical nuance:** blocking `GPTBot` only stops *training* use; **`OAI-SearchBot` is what lets ChatGPT Search cite you** — keep it allowed if you want AI citations. Same logic: `Googlebot`/`Bingbot` power AI Overviews and Copilot, so don't block them in the name of "AI opt-out". `Google-Extended` governs only Gemini *training*, not AI Overviews crawling.
 - **Training-bot tradeoff (an informed choice, not a default):** allowing `GPTBot`/`CCBot`/`Google-Extended` feeds the slow *memory* path (good for long-term recall) but gives content to model training. For most brands seeking visibility, allow them. If the client has IP concerns, you can allow the *search* bots (OAI-SearchBot, Googlebot, PerplexityBot, ClaudeBot) while disallowing the *training* bots — explain the trade.
+- **⚠️ Check your own auth gate first — it outranks the CDN as a cause.** On any app-framework site (Next.js middleware, Rails/Django auth, Vercel/Netlify password protection, a "coming soon" gate), the login gate often matches `/*` and **307s `/robots.txt`, `/sitemap.xml` and `/llms.txt` to `/login`**. Every AI crawler is then told "sign in" instead of being told what it may read, and the site is invisible while the repo looks perfect. Explicitly allowlist those paths in the gate, then verify with the curl block below — a `307`/`302` on any of them is the bug. Check this *before* blaming the CDN: it is the same silent failure, one layer earlier, and it is entirely inside code you control.
 - **⚠️ Verify on the LIVE site, not just the repo file — this is the #1 silent failure.** Many hosts/CDNs **override or inject** robots.txt: Cloudflare's *AI Crawl Control / "Managed robots.txt"* and "Block AI bots" toggle, or Vercel/Netlify/Webflow settings, or a WAF user-agent rule, can serve a *different* robots — or block AI bots at the edge — no matter what you deployed. **Fetch the live robots AS an AI bot** and confirm it matches what you shipped:
   ```bash
   for ua in "OAI-SearchBot" "GPTBot" "ClaudeBot" "PerplexityBot"; do
@@ -168,8 +169,23 @@ AI associates a *question* with a *URL*. A single-page site gives nothing specif
 
 Getting indexed fast is on-site work (earning third-party citations is Phase 3).
 - **Google Search Console** — verify (HTML-file or DNS; you can host the verification file for the client), submit `sitemap.xml`, `URL Inspection → Request indexing` for key pages.
-- **Bing Webmaster Tools** — add, verify, submit sitemap (Bing feeds ChatGPT/Copilot).
-- **IndexNow** (instant ping to Bing & others — no client login needed):
+- **Bing Webmaster Tools** — add the site, verify, submit `sitemap.xml`. ⚠️ **Treat this as a
+  top-priority step, not a Bing-traffic afterthought:** ChatGPT Search retrieves from Bing's index
+  (confirmed by OpenAI at launch; third-party analysis of 500+ ChatGPT citations found ~87% matched
+  Bing's top organic results for the same query). Copilot rides the same index.
+  **Being in Bing is necessary but not sufficient** — ChatGPT still fetches the page with
+  `OAI-SearchBot`, so a site that ranks on Bing while blocking that agent stays invisible in ChatGPT.
+  Check both, always: index membership AND crawler access (§1).
+  BWT can import verified properties straight from Google Search Console — do GSC first and this
+  takes about a minute.
+- **IndexNow** (instant ping to Bing & others — no client login needed). Two portability traps,
+  both hit for real on 2026-08-10 while wiring this up for avowd.ai:
+  · **The key file must be publicly fetchable.** If the site has an auth gate, its allow-list needs
+    the key file by name, or verification fetches a login redirect — and the ping still returns
+    202, so the failure is completely silent.
+  · **Do not strip the sitemap tags with `sed 's|</\?loc>||g'`** — `\?` is a GNU extension that
+    BSD sed (macOS) ignores, so `<loc>` survives into the payload and IndexNow answers 400.
+    Strip in the JSON-building step instead. (Working script: `GEO/dashboard/scripts/indexnow.sh`.)
   ```bash
   KEY=$(uuidgen | tr 'A-Z' 'a-z' | tr -d '-')
   printf "%s" "$KEY" > site/$KEY.txt           # host the key file, then deploy
@@ -181,6 +197,31 @@ Getting indexed fast is on-site work (earning third-party citations is Phase 3).
   # 200/202 = accepted
   ```
 - **Host quirk:** many static hosts 308-redirect `/page.html` → `/page`. Link the clean URL and confirm it returns **200 directly** (some verifiers don't follow redirects).
+
+## 9b. Google preferred sources — worth adding, and worth explaining honestly
+
+Google lets a searcher nominate sites they want more of. Those sites then carry a **"preferred" badge** for that person in **Top Stories, AI Overviews and AI Mode** — the last two make it a GEO surface, not just a news one. Confirmed by Google 2026-08-20; English-global from Dec 2025, all languages from 2026-04-30.
+
+**⚠️ It is NOT a ranking signal, and you will be asked otherwise.** A widely-shared video read *Search Engine Journal*'s headline ("now a global SEO signal") as "global ranking weight." "Global" there means **geographically available everywhere**. The mechanism is **personalized**: it changes what an opted-in reader sees, and nothing about what anyone else sees. Selling it as a ranking factor is a debt that comes due — say plainly what it does and does not do, on the page itself if you can.
+
+**Eligibility is wider than people assume:** domain and subdomain level sites only (no subdirectories), and **no Google News membership or news-publisher status is required**.
+
+**Two ways to install it — prefer the second:**
+
+```html
+<!-- Google's official embed: pulls a third-party script onto every page carrying it -->
+<script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
+<div google-add-preferred-source-btn></div>
+```
+
+```
+Documented deeplink — same result, no script, your own styling:
+https://www.google.com/preferences/source?q=EXAMPLE.com
+```
+
+Use the deeplink unless the client specifically wants Google's chip. The embed costs a render-blocking third-party request and an extra tracking surface charged to the visitor, and drops Google's branding into the client's design system. Draw the button yourself.
+
+**Set expectations before building it.** Value scales with existing audience — it converts loyal readers into durable visibility, it does not acquire readers. On a site nobody visits yet, nobody clicks it. **The right moment to install is immediately before a traffic event** (a launch, a campaign, a press hit), never after — the visitors who arrive during the spike are the only ones who can opt in, and they only come once. Put it where recurring content lives (a notes/blog/updates index), because "show me more of this source" only means something next to something that recurs.
 
 ## 10. Render check after deploy (always)
 ```bash

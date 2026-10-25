@@ -27,13 +27,46 @@ Machine-readable facts about the entity. **Only mark up what's visibly true on t
   "url": "https://EXAMPLE.com/",
   "email": "info@EXAMPLE.com",
   "description": "ENTITY SENTENCE.",
-  "address": { "@type": "PostalAddress", "addressLocality": "CITY", "addressRegion": "REGION", "addressCountry": "CC" },
-  "areaServed": [ { "@type": "City", "name": "CITY" }, { "@type": "AdministrativeArea", "name": "REGION" } ],
-  "sameAs": [ "https://instagram.com/HANDLE", "https://x.com/HANDLE", "https://www.linkedin.com/in/VANITY" ],
+  "address": { "@type": "PostalAddress", "addressLocality": "REGISTERED CITY", "addressRegion": "REGION", "addressCountry": "CC" },
+  "areaServed": [
+    { "@type": "City", "name": "CITY YOU SERVE 1" }, { "@type": "City", "name": "CITY YOU SERVE 2" },
+    { "@type": "City", "name": "CITY YOU SERVE 3" }, { "@type": "AdministrativeArea", "name": "METRO AREA" }
+  ],
+  "sameAs": [ "https://www.wikidata.org/wiki/QID", "https://instagram.com/HANDLE", "https://x.com/HANDLE", "https://www.linkedin.com/in/VANITY" ],
+  "identifier": [ { "@type": "PropertyValue", "propertyID": "REGISTRY NAME", "value": "REGISTRATION NUMBER" } ],
   "founder": { "@type": "Person", "@id": "https://EXAMPLE.com/#person" },
   "knowsAbout": [ "Topic 1", "Topic 2", "Topic 3" ]
 }
 </script>
+```
+
+### 🔴 `address` and `areaServed` are two different layers — do not collapse them
+
+The single most common local-business mistake, and one that costs a client the
+highest-intent question they could be asked.
+
+| Field | Put in it | Why |
+| --- | --- | --- |
+| **`address`** | The **registered / legal** city — whatever a public business registry says | An engine cross-checks this against the registry, the GBP and the directories. A mismatch reads as an unreliable entity, which is worse than a vague answer |
+| **`areaServed`** | **Every city the client actually serves**, by name, plus the metro area | This is the field that answers **"who does [service] in [city]?"** — the question closest to money |
+| **Page copy** | Whatever the audience recognises | Prose can say the metro name; it isn't a machine-readable claim |
+
+**Check every local client for this — most fail it:**
+
+1. `areaServed` holding only a country or province (or missing) is the default failure.
+   Country names match nothing. **List the cities by name**, then the metro area, then the country.
+2. `address` disagreeing with the registry / GBP / directories — fix the schema to match the
+   registry, not the other way round.
+3. A brand that markets under a **better-known nearby city** than the one it is registered in
+   is *not* a bug to erase — that is usually a deliberate, correct audience call
+   (a reader abroad knows the metro name and has never heard of the suburb).
+   **Keep both:** registered city in `address`, well-known city in `areaServed`, and let the
+   prose say whichever the reader knows. Both are true; they just live in different fields.
+4. Language matters here. Two municipalities that read as clearly separate in one language
+   are often one metro area in another. **Consistency is required *within* a language,
+   not across them** — don't "fix" localized copy into a precision its readers didn't ask for.
+
+```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

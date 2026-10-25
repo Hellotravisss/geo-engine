@@ -91,7 +91,66 @@ Ask relevant sites to add the brand to an existing "tools/resources" list — **
 
 ## Front 3 — Entity & authority signals
 
-- **Wikidata item.** Easier than Wikipedia, and LLMs read Wikidata. Create an item with: a label + one-line description, **`P31` (instance of: human / business / website)**, **`P856` (official website)**, and **external-ID properties** (LinkedIn, Crunchbase, GitHub) as `sameAs` anchors — each statement **referenced** to a source. Use the canonical entity sentence verbatim. ⚠️ **Bare promotional items with no independent sources get flagged and deleted** — only create one you can reference. (Wikipedia only if genuinely notable with independent coverage — don't force it.)
+> ### 🧭 Two layers, and the mistake that comes from mixing them
+>
+> **Entity layer** — Wikidata, encyclopedias, map records, company/product databases. These
+> change what the machines *believe the brand is*.
+> **Content layer** — Reddit, 知乎, Quora, YouTube, Medium, 小红书. These add *citable
+> third-party sources*.
+>
+> **Publishing a post is not correcting an entity.** An operator who posts ten answers and
+> reports "we improved the knowledge graph" has done real work on the wrong axis — the
+> entity is still whatever the graph said last week. Track them separately, report them
+> separately, and when a client's problem is *Present & WRONG*, only the entity layer fixes it.
+>
+> ### And check ACCESS before promising anything
+>
+> "Add us to X" means a different thing on each platform, and the difference is what a
+> retainer gets judged on:
+>
+> | Access | Means | Examples |
+> |---|---|---|
+> | **Yours** | just do it | site schema, YouTube |
+> | **Open edit** | edit freely, community rules apply | Wikidata, OSM, Reddit, 知乎 |
+> | **Claim + verify** | claim a listing, then you control it | GBP, Bing Places, Apple Business Connect, Crunchbase, G2 |
+> | **Suggest only** | you propose, someone else decides | Wikipedia (with a declared COI), Google Knowledge Panel |
+> | **Application** | gated, can be refused | 百度百科, 微信公众号 |
+>
+> Never promise a client an edit that is actually a suggestion. The full per-archetype list,
+> filtered by market, is implemented in the console at `lib/entity-surfaces.ts` — keep the two in sync.
+
+
+- **Wikidata item.** Easier than Wikipedia, and LLMs read Wikidata. Create an item with: a label + one-line description, **`P31` (instance of: human / business / website)**, **`P856` (official website)**, **`P159` (headquarters)**, **`P571` (inception)**, **`P2541` (operating area)**, **`P1454` (legal form)**, and **external-ID properties** (LinkedIn, Crunchbase, GitHub) as `sameAs` anchors — each statement **referenced** to a source. Use the canonical entity sentence verbatim.
+
+  **🔴 Do not apply Wikipedia's notability bar here — they are different standards, and confusing them will make you refuse work you should be doing.**
+
+  | | Wikipedia | **Wikidata (WD:N)** |
+  | --- | --- | --- |
+  | Needs | Independent, secondary, substantial coverage | **"Serious and publicly available" references — that is all** |
+  | Company registry as a source | ✗ Not enough | **✓ Qualifies** |
+  | Practical effect | Most SMB clients fail | **Any properly registered business passes** |
+
+  **A government business registration is a qualifying source.** Pull the registration and
+  reference the statements to its public record:
+
+  | Where | Public lookup |
+  | --- | --- |
+  | 🇨🇦 BC | `orgbook.gov.bc.ca/entity/<REG#>` — open API, no login |
+  | 🇨🇦 federal | Corporations Canada search |
+  | 🇺🇸 | Secretary of State business search (per state) |
+  | 🇬🇧 | Companies House (open API) |
+  | 🇨🇳 | 国家企业信用信息公示系统 |
+  | 🇦🇺 | ABN Lookup |
+
+  ⚠️ The real deletion risk is a **bare promotional item with no sourceable statements at all** —
+  not a small company. Reference the registration and it stands.
+
+  **The item is only half the job: `sameAs` must point back.** Wikidata asserting who the client
+  is, with nothing on the client's own site agreeing, is an unverified *claim*. Add the Wikidata
+  URL to the site's `Organization.sameAs` (and the registration number as an `identifier`) so the
+  assertion runs **both directions** — that is what turns it into a fact an engine will repeat.
+  Worth the most on brands whose name collides with a bigger entity (see the name-collision check
+  in Phase 0). *(Wikipedia only if genuinely notable with independent coverage — don't force it.)*
 - **"Best of" lists & roundups** — see 2c; also a strong authority signal.
 - **Quality directories & profiles** relevant to the niche (G2/Capterra for SaaS, Product Hunt for tools, industry associations for services) — selective, real ones only.
 - **Google Business Profile** (local/service brands) — claim it; set category, service area, website, photos, services. Major for "[service] in [city]" and Maps. Seed early, **genuine** reviews. Keep NAP (name/address/phone) identical to the site and every directory. ⚠️ **Never fake/incentivize reviews or keyword-stuff the GBP name** — both get the profile suspended. Re-verify every entity property (name, role, URL, `sameAs`, Wikidata) is **identical** to the entity sentence in `onsite-sop.md` — any mismatch splits the entity.
@@ -100,6 +159,23 @@ Ask relevant sites to add the brand to an existing "tools/resources" list — **
 - **If the brand *itself* is a directory/aggregator** (see `archetypes.md`): the play inverts — you want to *be* the cited list. Get the directory into "best [category] directories" roundups, earn press for the breadth/freshness of your coverage, and offer your aggregated data (where you have the rights) as a citable resource.
 
 ---
+
+### Platform traps that cost more than the listing is worth
+
+Each of these has been the reason someone's work got reverted, flagged or banned. Read before touching the platform, not after.
+
+- **Wikipedia — never edit a client's article yourself.** Undisclosed paid editing gets accounts blocked and the article tagged, which is *worse than no article*. Declare the conflict of interest and file an edit request on the Talk page. And if independent sources don't exist, don't create it: a deletion discussion is a permanent, public, indexable negative.
+- **Wikimedia Commons — the logo is a licensing decision, not a task.** Uploading releases the file under a free licence anyone may reuse commercially, competitors included. Get the client's written sign-off. (A plain wordmark may fall below the threshold of originality and carry no copyright at all — that one is safe; a designed logo is not.)
+- **OpenStreetMap — never edit it for SEO.** The community reverts promotional edits and blocks accounts. Add only what physically exists, tag it properly, stop.
+- **Google Business Profile — the name field is not a keyword field.** Stuffing it, or incentivizing reviews, suspends the profile. Also: request access on call #1, verification runs weeks and blocks the whole entity loop.
+- **Trustpilot — invitations must go to every customer**, not a filtered happy subset. Selective invitation breaks their rules and gets the profile publicly flagged, which is far worse than a mediocre score.
+- **G2 / Capterra — reviews are identity-verified.** Never solicit only-satisfied customers or offer anything of value; detection lands the penalty on the client's listing.
+- **Crunchbase — free editing is limited** and many fields sit behind a paid tier. Check what free still allows before promising a complete profile.
+- **Google Knowledge Panel cannot be created**, only claimed once it appears. The work that makes it appear is upstream (schema, Wikidata, consistent profiles). Treat the panel as a **result you measure**, not a task you do.
+- **百度百科 needs real published sources** and commercial entries usually go through the enterprise channel; it can be refused. Budget weeks.
+- **360百科 / 搜狗百科 — verify before promising.** Whether open editing still exists, whether commercial entries are accepted, and whether pages are still indexed all change. Attemptable, never deliverable.
+- **Hacker News punishes anything that reads as marketing**, and asking for votes is the fastest way to be flagged.
+- **Reddit — check the sub's self-promo ratio and account-age/karma gate first.** A removed post is wasted work; a banned account loses the channel.
 
 ## Tracking (every action logged — this becomes the report)
 

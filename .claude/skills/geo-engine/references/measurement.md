@@ -20,8 +20,10 @@ Keep the set **fixed** once chosen — changing prompts breaks comparability. Ad
 
 ## 2. The manual method (always works — the floor)
 
+> ⚠️ **The prompt must not contain the brand name or URL.** Asking "what is acme.com?" measures whether the engine can *read* the site — a site published an hour ago passes, because live-search engines just fetch the URL you handed them. Run branded prompts if you want, but book them under **positioning accuracy**, never under visibility, and keep them out of the mention-rate KPI. Mixing the two produces a baseline that looks healthy while unprompted recall is flat zero.
+
 Every month, ask each prompt in **ChatGPT, Perplexity, Gemini, Google AI Overviews, and Claude**, and record for each cell:
-- **Mentioned?** (brand named at all)
+- **Mentioned?** — record the **state**, not a boolean: `absent` / `correct` / **`wrong`** (the engine named the brand but described a business that doesn't exist). Count only `correct` toward mention rate; report `wrong` separately as a **hallucination rate** — it is a distinct, more urgent failure than absence, and a naive boolean scores it as a win. Memory-only engines (no live search) and Chinese engines answering about foreign brands are where it shows up.
 - **Linked?** (a clickable link to the brand)
 - **Rank/prominence** (first recommendation, in a list, footnote)
 - **Alongside whom** (which competitors share the answer)
@@ -39,8 +41,20 @@ Derive the headline KPIs by **averaging**: mention rate / link rate = mean of pe
 **KPI definitions (so the client can reproduce them):**
 - **Mention / link rate** = mean of per-prompt (hits ÷ runs), per engine, then averaged across engines.
 - **Share of voice (SOV)** = your mentions ÷ (your + named competitors') mentions across the prompt set. **Fix the competitor set in Phase 0 and keep it constant** — SOV is meaningless if the comparison set drifts.
-- **AI-referral sessions** = sessions whose referrer/UTM is on this allowlist: `chatgpt.com`, `perplexity.ai`, `gemini.google.com`, `copilot.microsoft.com`, `claude.ai` (extend as engines add referrers). Track in GA4 / Vercel / server logs.
+- **AI-referral sessions** = sessions whose referrer/UTM is on this allowlist: `chatgpt.com`, `perplexity.ai`, `gemini.google.com`, `copilot.microsoft.com`, `claude.ai` (extend as engines add referrers). Track in GA4 / Vercel / server logs. **⚠️ Report this as a floor, never a total — see below.**
 - **Pages cited by AI** = distinct URLs in the tracker's `source_cited` column for the month.
+
+> ### 🔴 AI-referral is a FLOOR, not a total. Say so in the report, every month.
+>
+> **Most AI traffic lands in "Direct."** A referrer only survives when the assistant opens the link in a browser that passes one. Native desktop and mobile apps generally pass nothing; users copy-paste URLs out of answers; some engines strip the header deliberately. The allowlist above catches the fraction that happens to leak a referrer, and misses the rest.
+>
+> **Why this matters more than a normal measurement caveat: the error runs against you.** A client reading "AI referrals: 12" concludes GEO delivers twelve sessions, when the real number is unknowable and larger. You will be underselling your own work with your own report — and if a client later attributes a deal to ChatGPT that your dashboard never counted, your numbers look broken rather than conservative.
+>
+> **How to handle it:**
+> - Label the row **"AI referrals (identified — floor)"** in every deliverable. Never let the bare number stand alone.
+> - Watch **Direct** as a corroborating trend line. A rising Direct share alongside rising mention rate is the expected signature of GEO working; it is not proof, and don't present it as proof.
+> - Add a **"how did you hear about us?"** field to the client's contact form. It is the only cheap way to catch what analytics structurally cannot, and self-reported attribution is the fallback the whole industry is stuck with.
+> - **Never build a KPI, a bonus, or a renewal case on AI-referral count alone.** Mention rate is the honest headline number, because you measure it directly instead of inferring it from a header the sender chose not to send.
 
 > **Read the trend, not the wobble.** With ~20 prompts a month-over-month swing under ~±5–10 points is mostly sampling noise — only a **sustained 3+ month move** is signal. Tell the client this up front so a noisy month doesn't spook anyone.
 
@@ -64,7 +78,7 @@ That surfaces capabilities for:
 Pull SOV + mentions history for the trend, and cited-domains for the niche to feed the off-site target list. Also useful from the same suite: **Search Console** tools (`gsc-*`) for impressions/clicks/query deltas (the retrieval path), and **web-analytics** for referral traffic. When a tool's response includes a `render_with` directive, call the specified render tool — don't dump raw rows.
 
 ## 4. Watch the logs (cheap corroboration)
-- **AI-referral traffic** — ChatGPT Search sends `utm_source=chatgpt.com`; Perplexity and others send referrers. Track in GA4 / Vercel Analytics / server logs.
+- **AI-referral traffic** — ChatGPT Search sends `utm_source=chatgpt.com`; Perplexity and others send referrers. Track in GA4 / Vercel Analytics / server logs. **Corroboration only — it is a floor, not a count (see §2).**
 - **AI crawler hits** — watch for the AI bots (`OAI-SearchBot`, `PerplexityBot`, `ClaudeBot`, `GPTBot`, … — full list in `onsite-sop.md` §1) in access logs; rising crawl = rising eligibility.
 - **GSC** — impressions/clicks/queries and which pages rank (AI Overviews draw from this index).
 
