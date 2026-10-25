@@ -9,7 +9,7 @@
 <img alt="engines" src="https://img.shields.io/badge/engines-Western%20%2B%20Chinese-7A6B4C?style=flat-square">
 </p>
 
-**The method for getting a brand named by AI answer engines** — ChatGPT, Perplexity, Gemini and Google AI Overviews, Claude, Grok, and the Chinese engines (DeepSeek, Kimi, Qwen, Doubao, Yuanbao). A complete, opinionated [Claude Code](https://claude.com/claude-code) skill for **Generative Engine Optimization (GEO / AEO)**, distilled from paid client work.
+**The method for getting a brand named by AI answer engines** — ChatGPT, Perplexity, Gemini and Google AI Overviews, Claude, Grok, and the Chinese engines (DeepSeek, Kimi, Qwen, Doubao, Yuanbao, Baidu). A complete, opinionated [Claude Code](https://claude.com/claude-code) skill for **Generative Engine Optimization (GEO / AEO)**, distilled from paid client work.
 
 When someone asks an AI *"best bakery for birthday cakes in Richmond BC"* or *"how much is 60k after tax in Ontario"*, the answer names three or four businesses. There is no page two. GEO is the work that puts **your** name in that short list — and this repo is the playbook for doing it without guessing.
 
@@ -17,7 +17,7 @@ When someone asks an AI *"best bakery for birthday cakes in Richmond BC"* or *"h
 
 | | Repo | What it answers |
 | --- | --- | --- |
-| **Measure** | [does-ai-know-you](https://github.com/Hellotravisss/does-ai-know-you) | *Which engines name you today, and who do they name instead?* Asks 11 engines your customers' questions, saves every answer. |
+| **Measure** | [does-ai-know-you](https://github.com/Hellotravisss/does-ai-know-you) | *Which engines name you today, and who do they name instead?* Asks 12 engines your customers' questions, saves every answer. |
 | **Move** | **geo-engine** (this repo) | *What do I change so that number goes up?* The engagement, the audit rubric, the off-site playbook, the monthly report. |
 
 Every recommendation in this skill assumes you measured first. A GEO plan without a baseline is a guess with a deadline.
@@ -83,7 +83,7 @@ bash poll.sh && bash fetch.sh # watch, then download the report
 
 ## Built by
 
-**Travis Zhang (Qi Zhang)** · [Avowd 青眼](https://avowd.ai) — measures brands across 11 AI engines, Western and Chinese, every month, and does the work that moves the numbers. How we measure: [avowd.ai/method](https://avowd.ai/method).
+**Travis Zhang (Qi Zhang)** · [Avowd 青眼](https://avowd.ai) — measures brands across 12 AI engines, Western and Chinese, every month, and does the work that moves the numbers. How we measure: [avowd.ai/method](https://avowd.ai/method).
 
 GEO audits, implementation and monthly retainers: **info@avowd.ai**
 
